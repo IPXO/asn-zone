@@ -1,0 +1,31 @@
+name: Weekly dataset refresh
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"   # Mondays 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set snapshot date
+        id: vars
+        run: echo "SNAPSHOT=$(date -u +%F)" >> $GITHUB_OUTPUT
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pipeline (stub)
+        run: |
+          mkdir -p data/current data/snapshots/${{ steps.vars.outputs.SNAPSHOT }}
+          echo '{"status":"ok","note":"replace with real dataset"}' > data/current/global.json
+          cp data/current/global.json data/snapshots/${{ steps.vars.outputs.SNAPSHOT }}/global.json
+      - name: Commit snapshot
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(data): weekly snapshot ${{ steps.vars.outputs.SNAPSHOT }}"
+          file_pattern: data/**
