@@ -1,0 +1,16 @@
+# Node
+node_modules/
+apps/web/.next/
+apps/web/out/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Python
+scripts/.venv/
+__pycache__/
+*.pyc
+
+# OS/IDE
+.DS_Store
+.env
