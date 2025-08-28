@@ -2,4 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light dark; }
+/* Tell the browser we support both themes */
+:root {
+  color-scheme: light dark;
+}
+
+/* Apply consistent background + text colors */
+html, body {
+  @apply min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-100 antialiased;
+}
+
+/* Smooth font rendering */
+body {
+  font-feature-settings: "liga", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links */
+a {
+  @apply text-indigo-600 hover:underline;
+}
+
+/* Utility: container override (Tailwind’s container is optional) */
+.container {
+  @apply mx-auto px-4;
+}
