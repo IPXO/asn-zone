@@ -1,1 +1,17 @@
-{"status":"ok","note":"replace with real dataset"}
+{
+  "generated_at": "2025-08-28T00:00:00Z",
+  "stats": {
+    "asns_total": 0,
+    "ipv4_announced": 0,
+    "ipv6_announced": 0
+  },
+  "top": {
+    "ipv4": [
+      { "asn": 15169, "name": "GOOGLE", "org": "Google LLC", "country": "US", "v4": 8388608 },
+      { "asn": 8075, "name": "MICROSOFT", "org": "Microsoft", "country": "US", "v4": 6291456 }
+    ],
+    "ipv6": [
+      { "asn": 15169, "name": "GOOGLE", "org": "Google LLC", "country": "US", "v6_slots": 2048 }
+    ]
+  }
+}
