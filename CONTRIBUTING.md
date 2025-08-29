@@ -1,4 +1,4 @@
-# Contributing to asn.io
+# Contributing to asn.zone
 
 Thanks for your interest in contributing! 🎉  
 asn.io is the **open, minimalistic, authoritative directory of Autonomous System Numbers (ASNs)**.  
@@ -43,5 +43,5 @@ If your PR touches private enrichments, it will be closed.
 
 1. Fork the repo and clone it locally
    ```bash
-   git clone https://github.com/<your-username>/asn-io.git
-   cd asn-io
+   git clone https://github.com/<your-username>/asn-zone.git
+   cd asn-zone
