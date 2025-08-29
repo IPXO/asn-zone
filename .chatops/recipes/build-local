@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT/apps/web"
+
+# Install deps (fast if already installed)
+npm install
+# Clean & build
+rm -rf .next out
+npm run build
+
+echo "Build complete. Static export at: $PWD/out"

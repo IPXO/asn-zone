@@ -31,4 +31,5 @@ Thumbs.db
 
 # Logs
 *.log
-logs/
+logs/.chatops/last.log
+.chatops/last.log

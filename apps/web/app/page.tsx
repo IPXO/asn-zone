@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Stat from "./components/Stat";
 import { loadGlobal, getTopIPv4, getTopIPv6, type V4TopItem, type V6TopItem } from "../lib/data";
 import Table from "../components/Table";
 import Script from "next/script";

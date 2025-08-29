@@ -2,7 +2,7 @@ import Link from "next/link";
 import Badge from "../../components/Badge";
 import Stat from "../../components/Stat";
 import Card, { CardHeader, CardContent } from "../../components/ui/Card";
-import { loadGlobal, getAsnById } from "../../../lib/data";
+import { loadGlobal, getAsnById } from "../../lib/data";
 
 export const dynamicParams = false;
 

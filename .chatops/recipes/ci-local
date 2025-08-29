@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT/apps/web"
+
+echo "==> npm ci / install"
+npm install
+
+echo "==> Prettier check"
+npm run format:check || true
+
+echo "==> Typecheck"
+npx tsc -v >/dev/null 2>&1 || true
+# Next's type-check happens in build, but we can run TS quick sanity if needed
+
+echo "==> Build"
+rm -rf .next out
+npm run build

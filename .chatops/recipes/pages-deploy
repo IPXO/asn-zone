@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$ROOT"
+
+# Make a harmless empty commit to trigger CI
+git commit --allow-empty -m "chore(ci): trigger pages deploy"
+git push origin main
+echo "Pushed empty commit to main to trigger Pages."
