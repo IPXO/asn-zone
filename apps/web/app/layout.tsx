@@ -1,11 +1,21 @@
+// apps/web/app/layout.tsx
 import "./globals.css";
 import Link from "next/link";
 import { Providers } from "./providers";
 import ThemeToggle from "./ThemeToggle";
 
 export const metadata = {
-  title: "asn.io — authoritative ASN directory",
+  title: "asn.zone — authoritative ASN directory",
   description: "Explore ASNs, IP space, ownership, and trends.",
+  // Favicons (Next will prefix these with basePath in production)
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/favicon.svg" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,23 +26,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">
-                {/* light/dark lockups */}
-                <img src="/brand/asn-io-logo.svg" alt="asn.io" className="h-8 w-auto hidden dark:block" />
-                <img src="/brand/asn-io-logo-mono.svg" alt="asn.io" className="h-8 w-auto block dark:hidden" />
+                {/* Use a relative path so it works with basePath on GitHub Pages */}
+                <img
+                  src="brand/logo.svg"
+                  alt="asn.zone"
+                  className="h-8 w-auto"
+                />
               </Link>
 
               <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
-                <Link className="hover:text-indigo-600" href="/top/ipv4">Top IPv4</Link>
-                <Link className="hover:text-indigo-600" href="/top/ipv6">Top IPv6</Link>
-                <Link className="hover:text-indigo-600" href="/search">Search</Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv4">
+                  Top IPv4
+                </Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv6">
+                  Top IPv6
+                </Link>
+                <Link className="hover:text-indigo-600" href="/search">
+                  Search
+                </Link>
                 <ThemeToggle />
               </nav>
             </div>
           </header>
 
-          <main className="container mx-auto max-w-5xl px-4 py-8">
-            {children}
-          </main>
+          <main className="container mx-auto max-w-5xl px-4 py-8">{children}</main>
 
           <footer className="border-t border-gray-200 dark:border-white/10">
             <div className="container mx-auto max-w-5xl px-4 py-6 text-sm text-gray-500 dark:text-gray-400">

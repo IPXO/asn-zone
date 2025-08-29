@@ -1,12 +1,11 @@
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/asn-io' : '';
+const basePath = isProd ? '/asn-zone' : '';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',              // static export
-  basePath,                      // GitHub Pages subpath
-  assetPrefix: basePath + '/',   // prefix for assets
-  images: { unoptimized: true }, // disable Next image optimizer on Pages
+  output: 'export',
+  basePath,
+  assetPrefix: basePath + '/',
+  images: { unoptimized: true },
 };
-
 export default nextConfig;

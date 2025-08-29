@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Light mode */
+    .bg { fill:#FFFFFF; }
+    .text { fill:#0A192F; } /* Midnight Navy */
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      .bg { fill:#0A192F; }   /* Navy background */
+      .text { fill:#FFFFFF; } /* White text */
+    }
+  </style>
+
+  <!-- Rounded background -->
+  <rect class="bg" x="0" y="0" width="512" height="512" rx="96" ry="96"/>
+
+  <!-- Centered text -->
+  <g transform="translate(259.072,256)">
+    <text x="0" y="0"
+          class="text"
+          font-family="Space Grotesk, Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', sans-serif"
+          font-weight="700"
+          font-size="280"
+          text-anchor="middle"
+          dominant-baseline="middle"
+          dy="-0.06em">asn</text>
+  </g>
+</svg>

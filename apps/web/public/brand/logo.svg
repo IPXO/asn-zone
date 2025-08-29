@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 220" role="img" aria-label="asn.zone logo auto dark/light mode">
+  <style>
+    /* Default (light mode) */
+    .asn { fill:#0D0736; }   /* Dark Blue for "asn." */
+    .zone { fill:#2057FF; }  /* Brand Blue */
+
+    /* Dark mode override */
+    @media (prefers-color-scheme: dark) {
+      .asn { fill:#FFFFFF; } /* White for "asn." */
+      .zone { fill:#2057FF; } /* Keep "zone" blue */
+    }
+  </style>
+
+  <g font-family="Inter, Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+    <text x="290" y="150" font-size="120" font-weight="800" letter-spacing="0.5">
+      <tspan class="asn">asn.</tspan><tspan class="zone">zone</tspan>
+    </text>
+  </g>
+</svg>
