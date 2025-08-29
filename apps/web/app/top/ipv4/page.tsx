@@ -17,7 +17,7 @@ export default async function Page() {
           { key: "name", label: "Name" },
           { key: "org", label: "Org", render: (v) => <Link className="text-indigo-600" href={`/org/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
           { key: "country", label: "CC", render: (v) => <Link className="text-indigo-600" href={`/country/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
-          { key: "v4_slash24s", label: "/24s", render: (v) => Number(v).toLocaleString("en-US") },
+          { key: "v4_slash24s", label: "/24s", align: "right", render: (v) => Number(v).toLocaleString("en-US") },
         ]}
         rows={rows as unknown as Record<string, any>[]}
       />

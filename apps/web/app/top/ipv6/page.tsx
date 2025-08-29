@@ -10,14 +10,14 @@ export default async function Page() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-semibold">Top ASNs by IPv6 (/32 slots)</h1>
+      <h1 className="text-xl font-semibold">Top ASNs by IPv6 (slots)</h1>
       <Table
         columns={[
           { key: "asn", label: "ASN", render: (v) => <Link className="text-indigo-600" href={`/asn/${v}`}>AS{v}</Link> },
           { key: "name", label: "Name" },
           { key: "org", label: "Org", render: (v) => <Link className="text-indigo-600" href={`/org/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
           { key: "country", label: "CC", render: (v) => <Link className="text-indigo-600" href={`/country/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
-          { key: "v6_slots", label: "Slots", render: (v) => Number(v).toLocaleString("en-US") },
+          { key: "v6_slots", label: "Slots", align: "right", render: (v) => Number(v).toLocaleString("en-US") },
         ]}
         rows={rows as unknown as Record<string, any>[]}
       />
