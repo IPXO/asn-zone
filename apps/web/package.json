@@ -6,7 +6,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint app --ext .ts,.tsx",
-    "mkroute": "node ./scripts/mkroute.mjs"
+    "mkroute": "node ./scripts/mkroute.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "export:local": "rm -rf out && next build"
   },
   "dependencies": {
     "next": "^14.2.32",
@@ -22,6 +25,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.32",
     "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4.1.12",
     "typescript": "5.5.4"
   }

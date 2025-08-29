@@ -1,6 +1,9 @@
 name: Link check
+
 on:
   pull_request:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -8,16 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      # Build static site (Next 14 + output: export writes to out/)
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/web/package-lock.json
+
       - name: Install deps
         working-directory: apps/web
         run: npm ci
-      - name: Build (static export)
+
+      - name: Build
         working-directory: apps/web
         run: npm run build
-      - name: Link check with lychee
+
+      # Check local HTML and external links; fail on actual 4xx/5xx
+      - name: Lychee link check
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress apps/web/out
+          # check both exported HTML and the repo markdown
+          args: >-
+            --verbose
+            --user-agent "asn.zone-ci"
+            --max-concurrency 8
+            --retry-wait-time 2
+            --accept 200,206,301,302,307,308
+            "apps/web/out/**/*.html"
+            "**/*.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
