@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core pages -->
+  <url><loc>https://ipxo.github.io/asn-zone/</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/top/ipv4</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/top/ipv6</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/search</loc></url>
+
+  <!-- Seeded dynamic pages we currently prerender -->
+  <url><loc>https://ipxo.github.io/asn-zone/asn/15169</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/asn/8075</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/country/US</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/country/GB</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/org/Google</loc></url>
+  <url><loc>https://ipxo.github.io/asn-zone/org/Microsoft</loc></url>
+</urlset>
