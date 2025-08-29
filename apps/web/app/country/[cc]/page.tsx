@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Breadcrumbs from "../../components/Breadcrumbs";
 import Table from "../../components/Table";
 import { loadGlobal, getAsnsByCountry, isoCountryName } from "../../../lib/data";
 
@@ -7,42 +5,39 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const g = await loadGlobal();
-  const set = new Set<string>([
+  const ccs = new Set<string>([
     ...g.top.ipv4.map(r => r.country),
     ...g.top.ipv6.map(r => r.country),
   ]);
-  return Array.from(set).slice(0, 50).map(cc => ({ cc }));
+  return Array.from(ccs).slice(0, 50).map(cc => ({ cc }));
+}
+
+export async function generateMetadata({ params }: { params: { cc: string } }) {
+  const label = isoCountryName(params.cc) ?? params.cc;
+  return {
+    title: `ASNs in ${label} — asn.zone`,
+    description: `Autonomous Systems registered/announced in ${label}.`,
+  };
 }
 
 export default async function CountryPage({ params }: { params: { cc: string } }) {
   const g = await loadGlobal();
-  const cc = params.cc.toUpperCase();
-  const name = isoCountryName(cc) ?? cc;
-  const rows = getAsnsByCountry(g, cc);
+  const rows = getAsnsByCountry(g, params.cc);
+  const ccLabel = isoCountryName(params.cc) ?? params.cc;
 
   return (
     <div className="space-y-6">
-      <Breadcrumbs items={[
-        { href: "/", label: "Home" },
-        { href: "/country", label: "Countries" },
-        { label: `${name} (${cc})` },
-      ]}/>
-      <h1 className="text-2xl font-semibold">{name} <span className="text-gray-500 text-xl">({cc})</span></h1>
-
+      <h1 className="text-xl font-semibold">Country: {ccLabel}</h1>
       <Table
         columns={[
-          { key: "asn", label: "ASN", render: (v) => <Link className="text-indigo-600" href={`/asn/${v}`}>AS{v}</Link> },
+          { key: "asn", label: "ASN", kind: "asn" },
           { key: "name", label: "Name" },
-          { key: "org", label: "Org", render: (v) => <Link className="text-indigo-600" href={`/org/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
-          { key: "v4_slash24s", label: "IPv4 /24s", render: (v) => Number(v).toLocaleString("en-US") },
-          { key: "v6_slots", label: "IPv6 slots", render: (v) => Number(v).toLocaleString("en-US") },
+          { key: "org", label: "Org", kind: "org" },
+          { key: "v4_slash24s", label: "IPv4 /24s", kind: "number" },
+          { key: "v6_slots", label: "IPv6 slots", kind: "number" },
         ]}
         rows={rows as unknown as Record<string, any>[]}
       />
-
-      <div className="text-sm text-gray-500">
-        Snapshot: {new Date(g.generated_at).toLocaleString()} • <Link className="text-indigo-600" href="/country">All countries</Link>
-      </div>
     </div>
   );
 }

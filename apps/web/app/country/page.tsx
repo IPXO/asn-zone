@@ -1,29 +1,31 @@
 import Link from "next/link";
-import { loadGlobal, getCountryAgg } from "../../lib/data";
-import Table from "../components/Table";
+import { loadGlobal, isoCountryName } from "../../lib/data";
 
 export const metadata = {
   title: "Countries — asn.zone",
-  description: "ASNs and announced IP space by country.",
+  description: "Browse ASNs by country.",
 };
 
-export default async function CountryIndexPage() {
+export default async function CountryIndex() {
   const g = await loadGlobal();
-  const rows = getCountryAgg(g);
+  const ccs = new Set<string>([
+    ...g.top.ipv4.map(r => r.country),
+    ...g.top.ipv6.map(r => r.country),
+  ]);
+  const list = Array.from(ccs).sort();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <h1 className="text-xl font-semibold">Countries</h1>
-      <Table
-        columns={[
-          { key: "cc", label: "CC", render: (v) => <Link className="text-indigo-600" href={`/country/${encodeURIComponent(String(v))}`}>{String(v)}</Link> },
-          { key: "name", label: "Country" },
-          { key: "asns", label: "ASNs", render: (v) => Number(v).toLocaleString("en-US") },
-          { key: "v4_slash24s", label: "IPv4 (/24s)", render: (v) => Number(v).toLocaleString("en-US") },
-          { key: "v6_slots", label: "IPv6 (slots)", render: (v) => Number(v).toLocaleString("en-US") },
-        ]}
-        rows={rows as unknown as Record<string, any>[]}
-      />
+      <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+        {list.map(cc => (
+          <li key={cc}>
+            <Link className="text-indigo-600" href={`/country/${encodeURIComponent(cc)}`}>
+              {isoCountryName(cc) ?? cc} ({cc})
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
