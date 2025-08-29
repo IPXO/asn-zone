@@ -1,30 +1,23 @@
-# Force consistent line endings
-* text=auto eol=lf
+# Auto-normalize text files
+* text=auto
 
-# Ensure JSON/CSV datasets are diffed as text
-*.json text diff
-*.csv  text diff
+# Force LF for source files
+*.js   text eol=lf
+*.jsx  text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.css  text eol=lf
+*.md   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
 
-# Lock binary assets (don’t diff, just show as binary)
-*.ico   binary
-*.png   binary
-*.jpg   binary
-*.jpeg  binary
-*.svg   text   # keep SVG as text (good for diffs/reviews)
+# Images/binaries
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
 
-# Ignore generated build artifacts in diffs (treat as binary)
-apps/web/out/*     binary
-apps/web/.next/*   binary
-
-# Docs and configs always text
-*.md    text
-*.yml   text
-*.yaml  text
-*.toml  text
-*.sh    text
-*.ts    text
-*.tsx   text
-*.js    text
-*.jsx   text
-*.css   text
-*.html  text
+# SVGs are text (diffable)
+*.svg  text eol=lf
