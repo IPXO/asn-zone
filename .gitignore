@@ -1,4 +1,4 @@
-# Node
+# Node / Next.js
 node_modules/
 apps/web/.next/
 apps/web/out/
@@ -6,11 +6,27 @@ npm-debug.log*
 yarn.lock
 pnpm-lock.yaml
 
+# Build artifacts
+dist/
+.cache/
+
 # Python
 scripts/.venv/
 __pycache__/
 *.pyc
 
-# OS/IDE
+# OS / Editor junk
 .DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Env files
 .env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/

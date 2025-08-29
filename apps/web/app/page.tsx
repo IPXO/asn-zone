@@ -11,7 +11,8 @@ type Global = {
 
 function loadGlobal(): Global {
   try {
-    const p = path.join(process.cwd(), "data", "current", "global.json");
+    // apps/web is two levels below repo root: <root>/apps/web
+    const p = path.resolve(process.cwd(), "..", "..", "data", "current", "global.json");
     return JSON.parse(fs.readFileSync(p, "utf8"));
   } catch {
     return {};
