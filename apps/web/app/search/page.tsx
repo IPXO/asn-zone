@@ -1,4 +1,4 @@
-export const metadata = { title: 'Search — asn.io' };
+export const metadata = { title: 'Search — asn.zone' };
 
 export default function SearchPage() {
   return (

@@ -1,4 +1,4 @@
-export const metadata = { title: 'Top IPv4 — asn.io' };
+export const metadata = { title: 'Top IPv4 — zone' };
 
 export default function TopIPv4Page() {
   return (

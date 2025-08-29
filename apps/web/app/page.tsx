@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">asn.io</h1>
+        <h1 className="text-2xl font-semibold">asn.zone</h1>
         <p className="text-gray-600 dark:text-gray-400">
           The open, minimalistic, authoritative ASN directory.
         </p>
