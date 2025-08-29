@@ -2,6 +2,7 @@ import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { Providers } from "./providers";
+import SeoJsonLd from "./SeoJsonLd";
 import ThemeToggle from "./ThemeToggle";
 import { loadGlobal } from "../lib/data";
 
@@ -83,6 +84,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               </Link>
             </div>
           </footer>
+          <SeoJsonLd />
+
         </Providers>
       </body>
     </html>
