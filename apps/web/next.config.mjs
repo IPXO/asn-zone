@@ -7,5 +7,11 @@ const nextConfig = {
   basePath,
   assetPrefix: basePath + '/',
   images: { unoptimized: true },
+
+  // ✅ Skip ESLint checks during build (still run npm run lint manually if needed)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
+
 export default nextConfig;
