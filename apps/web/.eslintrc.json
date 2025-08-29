@@ -2,7 +2,14 @@
   "root": true,
   "extends": ["next/core-web-vitals"],
   "parserOptions": {
-    "project": false
+    "project": ["./tsconfig.json"],
+    "tsconfigRootDir": "."
   },
-  "ignorePatterns": ["./.next/", "./out/"]
+  "rules": {
+    "@next/next/no-img-element": "off"
+  },
+  "ignorePatterns": [
+    ".next/",
+    "out/"
+  ]
 }
