@@ -1,24 +1,45 @@
-name: Link Check
+name: Link check (pre-deploy)
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  lychee:
+  linkcheck:
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 20
+      NEXT_TELEMETRY_DISABLED: 1
+      CI: true
     steps:
-      - uses: actions/checkout@v4
-      - name: Build static site
-        run: |
-          cd apps/web
-          npm ci
-          npm run build
-      - name: Run link checker
-        uses: lycheeverse/lychee-action@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          # Check built HTML under out/
-          args: --verbose --no-progress --accept 200,206,429 --base http://localhost/ "apps/web/out/**/*.html"
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install deps
+        working-directory: apps/web
+        run: npm ci
+
+      - name: Build static site
+        working-directory: apps/web
+        run: npm run build
+
+      # Use lychee to scan the built HTML for broken links
+      - name: Link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Scan the exported site
+          args: >
+            --verbose
+            --no-progress
+            --accept 200..399
+            --base "https://ipxo.github.io/asn-zone"
+            "apps/web/out/**/*.html"
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
