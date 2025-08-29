@@ -25,8 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-3" prefetch={false}>
-                {/* Using next/image ensures basePath (/asn-zone) is prefixed on GitHub Pages */}
+              <Link href="/" className="flex items-center gap-3">
+                {/* Next/Image auto-applies basePath, fixing the 404 on GitHub Pages */}
                 <Image
                   src="/brand/logo.svg"
                   alt="asn.zone"
@@ -37,9 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
 
               <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
-                <Link className="hover:text-indigo-600" href="/top/ipv4" prefetch={false}>Top IPv4</Link>
-                <Link className="hover:text-indigo-600" href="/top/ipv6" prefetch={false}>Top IPv6</Link>
-                <Link className="hover:text-indigo-600" href="/search" prefetch={false}>Search</Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv4">Top IPv4</Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv6">Top IPv6</Link>
+                <Link className="hover:text-indigo-600" href="/search">Search</Link>
                 <ThemeToggle />
               </nav>
             </div>
