@@ -3,27 +3,29 @@ import Link from "next/link";
 import Image from "next/image";
 import { Providers } from "./providers";
 import ThemeToggle from "./ThemeToggle";
+import Script from "next/script";
+import type { Metadata } from "next";
 
-export const metadata = {
-  metadataBase: new URL("https://ipxo.github.io/asn-zone/"),
+export const metadata: Metadata = {
+  metadataBase: new URL("https://ipxo.github.io/asn-zone"),
   title: "asn.zone — authoritative ASN directory",
   description: "Explore ASNs, IP space, ownership, and trends.",
   alternates: { canonical: "/" },
   openGraph: {
-    type: "website",
+    title: "asn.zone — authoritative ASN directory",
+    description: "Explore ASNs, IP space, ownership, and trends.",
     url: "/",
     siteName: "asn.zone",
-    title: "asn.zone — authoritative ASN directory",
-    description: "Explore ASNs, IP space, ownership, and trends.",
-    images: [{ url: "brand/logo.svg" }],
+    images: ["/brand/logo.svg"],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "asn.zone — authoritative ASN directory",
     description: "Explore ASNs, IP space, ownership, and trends.",
-    images: ["brand/logo.svg"],
+    images: ["/brand/logo.svg"],
   },
-  // Use RELATIVE icon paths so they work under /asn-zone on GitHub Pages
   icons: {
     icon: [
       { url: "favicon.ico", type: "image/x-icon" },
@@ -38,29 +40,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-white text-gray-900 dark:bg-black dark:text-gray-100 antialiased">
-        {/* Minimal JSON-LD so crawlers understand the site */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "asn.zone",
-              url: "https://ipxo.github.io/asn-zone/",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://ipxo.github.io/asn-zone/search?q={query}",
-                "query-input": "required name=query",
-              },
-            }),
-          }}
-        />
+        {/* Optional analytics injected when NEXT_PUBLIC_PLAUSIBLE_DOMAIN is set */}
+        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
+          <Script
+            defer
+            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+            src="https://plausible.io/js/script.js"
+          />
+        )}
         <Providers>
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">
-                {/* relative path -> /asn-zone/brand/logo.svg in prod */}
-                <Image src="brand/logo.svg" alt="asn.zone" width={120} height={32} priority unoptimized />
+                <Image
+                  src="brand/logo.svg"
+                  alt="asn.zone"
+                  width={120}
+                  height={32}
+                  priority
+                  unoptimized
+                />
               </Link>
               <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
                 <Link className="hover:text-indigo-600" href="/top/ipv4">Top IPv4</Link>
