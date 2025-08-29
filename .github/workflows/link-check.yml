@@ -1,0 +1,24 @@
+name: Link Check
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build static site
+        run: |
+          cd apps/web
+          npm ci
+          npm run build
+      - name: Run link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          # Check built HTML under out/
+          args: --verbose --no-progress --accept 200,206,429 --base http://localhost/ "apps/web/out/**/*.html"
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
