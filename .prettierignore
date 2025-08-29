@@ -1,27 +1,11 @@
-# Build & output
+# Build artifacts
 .next/
 out/
 apps/web/.next/
 apps/web/out/
 
-# Node junk
+# Dependencies
 node_modules/
-**/node_modules/
-
-# Coverage / logs
-coverage/
-*.log
-.chatops/last.log
 
 # Generated manifests
-**/*.nft.json
-**/font-manifest.json
-**/react-loadable-manifest*.json
-**/server-reference-manifest*.json
-**/interception-route-rewrite-manifest*.js
-**/routes-manifest.json
-**/prerender-manifest.json
-**/build-manifest.json
-**/app-build-manifest.json
-**/app-path-routes-manifest.json
-**/pages-manifest.json
+**/package-lock.json

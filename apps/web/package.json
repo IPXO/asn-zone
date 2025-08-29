@@ -7,8 +7,8 @@
     "start": "next start",
     "lint": "eslint app --ext .ts,.tsx",
     "mkroute": "node ./scripts/mkroute.mjs",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "prettier --write \"app/**/*.{ts,tsx,css}\" \"components/**/*.tsx\" \"lib/**/*.{ts,tsx}\" \"scripts/**/*.{js,mjs,sh}\"",
+    "format:check": "prettier --check \"app/**/*.{ts,tsx,css}\" \"components/**/*.tsx\" \"lib/**/*.{ts,tsx}\" \"scripts/**/*.{js,mjs,sh}\"",
     "export:local": "rm -rf out && next build"
   },
   "dependencies": {
