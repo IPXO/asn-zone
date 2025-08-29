@@ -85,3 +85,76 @@ export function isoCountryName(cc: string): string {
   const k = (cc || "").toUpperCase();
   return ISO_COUNTRIES[k] || k;
 }
+/* === Aggregations for Country & Org indexes ============================== */
+
+export type CountryAgg = {
+  cc: string;
+  name: string;
+  asns: number;
+  v4_slash24s: number;
+  v6_slots: number;
+};
+
+export type OrgAgg = {
+  org: string;
+  asns: number;
+  v4_slash24s: number;
+  v6_slots: number;
+};
+
+export function getCountryAgg(g: GlobalJson): CountryAgg[] {
+  // de-duplicate ASNs across v4/v6 before counting
+  const byAsn = new Map<number, { country?: string; v4?: number; v6?: number; name?: string; org?: string }>();
+
+  for (const r of g.top.ipv4) {
+    const e = byAsn.get(r.asn) || {};
+    byAsn.set(r.asn, { ...e, country: r.country, v4: r.v4_slash24s ?? 0, name: r.name, org: r.org });
+  }
+  for (const r of g.top.ipv6) {
+    const e = byAsn.get(r.asn) || {};
+    byAsn.set(r.asn, { ...e, country: e.country ?? r.country, v6: r.v6_slots ?? 0, name: r.name, org: r.org });
+  }
+
+  const agg = new Map<string, CountryAgg>();
+  for (const a of byAsn.values()) {
+    if (!a.country) continue;
+    const cc = a.country;
+    const cur = agg.get(cc) || { cc, name: isoCountryName(cc), asns: 0, v4_slash24s: 0, v6_slots: 0 };
+    cur.asns += 1;
+    cur.v4_slash24s += a.v4 ?? 0;
+    cur.v6_slots += a.v6 ?? 0;
+    agg.set(cc, cur);
+  }
+
+  return Array.from(agg.values()).sort((a, b) =>
+    b.v4_slash24s - a.v4_slash24s || b.v6_slots - a.v6_slots || a.cc.localeCompare(b.cc)
+  );
+}
+
+export function getOrgAgg(g: GlobalJson): OrgAgg[] {
+  const byAsn = new Map<number, { org?: string; v4?: number; v6?: number }>();
+
+  for (const r of g.top.ipv4) {
+    const e = byAsn.get(r.asn) || {};
+    byAsn.set(r.asn, { ...e, org: r.org, v4: r.v4_slash24s ?? 0 });
+  }
+  for (const r of g.top.ipv6) {
+    const e = byAsn.get(r.asn) || {};
+    byAsn.set(r.asn, { ...e, org: e.org ?? r.org, v6: r.v6_slots ?? 0 });
+  }
+
+  const agg = new Map<string, OrgAgg>();
+  for (const a of byAsn.values()) {
+    const org = a.org?.trim();
+    if (!org) continue;
+    const cur = agg.get(org) || { org, asns: 0, v4_slash24s: 0, v6_slots: 0 };
+    cur.asns += 1;
+    cur.v4_slash24s += a.v4 ?? 0;
+    cur.v6_slots += a.v6 ?? 0;
+    agg.set(org, cur);
+  }
+
+  return Array.from(agg.values()).sort((a, b) =>
+    b.v4_slash24s - a.v4_slash24s || b.v6_slots - a.v6_slots || a.org.localeCompare(b.org)
+  );
+}

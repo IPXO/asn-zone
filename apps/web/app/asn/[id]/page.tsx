@@ -1,19 +1,21 @@
+
+export const metadata = {
+  title: ({ params }: any) => `AS${params.id} — asn.zone`,
+  description: ({ params }: any) => `Details for AS${params.id} on asn.zone`,
+};
+
 import Link from "next/link";
-import Badge from "../../components/Badge";
-import Stat from "../../components/Stat";
-import Card, { CardHeader, CardContent } from "../../components/ui/Card";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import { loadGlobal, getAsnById } from "../../../lib/data";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const g = await loadGlobal();
-  const ids = Array.from(
-    new Set([
-      ...g.top.ipv4.map((r) => r.asn),
-      ...g.top.ipv6.map((r) => r.asn),
-    ])
-  ).slice(0, 50);
+  const ids = Array.from(new Set([
+    ...g.top.ipv4.map(r => r.asn),
+    ...g.top.ipv6.map(r => r.asn),
+  ])).slice(0, 50);
   return ids.map((id) => ({ id: String(id) }));
 }
 
@@ -21,48 +23,37 @@ export default async function AsnPage({ params }: { params: { id: string } }) {
   const g = await loadGlobal();
   const asn = getAsnById(g, Number(params.id));
 
-  if (!asn) {
-    return (
-      <div className="space-y-4">
-        <h1 className="text-2xl font-semibold">AS{params.id}</h1>
-        <p className="text-gray-600">Not found in the current snapshot.</p>
-        <Link className="text-indigo-600" href="/">← Back home</Link>
-      </div>
-    );
-  }
-
-  const fmt = (n: number) => n.toLocaleString("en-US");
-
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <h1 className="text-2xl font-semibold">AS{asn.asn} — {asn.name}</h1>
-        <Badge>{asn.country}</Badge>
-      </div>
-
-      <div className="text-gray-600">
-        <Link className="text-indigo-600" href={`/org/${encodeURIComponent(asn.org)}`}>{asn.org}</Link>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        {"v4_slash24s" in asn && (
-          <Stat label="IPv4 announced" value={fmt(asn.v4_slash24s)} hint="/24 equivalents" />
-        )}
-        {"v6_slots" in asn && (
-          <Stat label="IPv6 announced" value={fmt(asn.v6_slots)} hint="/32 slots" />
+      <Breadcrumbs items={[
+        { href: "/", label: "Home" },
+        { label: `AS${params.id}` },
+      ]}/>
+      <div>
+        <h1 className="text-2xl font-semibold">AS{params.id}{asn ? ` — ${asn.name}` : ""}</h1>
+        {asn ? (
+          <p className="text-gray-600">{asn.org} • {asn.country}</p>
+        ) : (
+          <p className="text-gray-600">Not found in the current snapshot.</p>
         )}
       </div>
 
-      <Card>
-        <CardHeader>Links</CardHeader>
-        <CardContent>
-          <ul className="list-disc pl-5 space-y-1">
-            <li><Link className="text-indigo-600" href={`/country/${asn.country}`}>Other ASNs in {asn.country}</Link></li>
-            <li><Link className="text-indigo-600" href={`/top/ipv4`}>Top IPv4</Link></li>
-            <li><Link className="text-indigo-600" href={`/top/ipv6`}>Top IPv6</Link></li>
-          </ul>
-        </CardContent>
-      </Card>
+      {asn && (
+        <div className="grid gap-4 md:grid-cols-2">
+          {"v4_slash24s" in asn && (
+            <div className="rounded-2xl border border-gray-200/70 dark:border-white/10 p-4">
+              <div className="text-xs uppercase text-gray-500">IPv4 (/24s)</div>
+              <div className="text-2xl font-semibold">{asn.v4_slash24s.toLocaleString("en-US")}</div>
+            </div>
+          )}
+          {"v6_slots" in asn && (
+            <div className="rounded-2xl border border-gray-200/70 dark:border-white/10 p-4">
+              <div className="text-xs uppercase text-gray-500">IPv6 (slots)</div>
+              <div className="text-2xl font-semibold">{asn.v6_slots.toLocaleString("en-US")}</div>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="text-sm text-gray-500">
         Snapshot: {new Date(g.generated_at).toLocaleString()} • <Link className="text-indigo-600" href="/">Home</Link>

@@ -4,6 +4,7 @@ type Column = {
   key: string;
   label: string;
   render?: (value: any, row: Record<string, any>) => React.ReactNode;
+  align?: "left" | "right";
 };
 
 export default function Table({
@@ -19,7 +20,10 @@ export default function Table({
         <thead className="bg-gray-50 dark:bg-white/5 text-gray-600 dark:text-gray-300">
           <tr>
             {columns.map((c) => (
-              <th key={c.key} className="px-3 py-2 text-left font-medium">
+              <th
+                key={c.key}
+                className={`px-3 py-2 text-left font-medium ${c.align === "right" ? "text-right" : "text-left"}`}
+              >
                 {c.label}
               </th>
             ))}
@@ -31,7 +35,10 @@ export default function Table({
               {columns.map((c) => {
                 const v = (row as any)[c.key];
                 return (
-                  <td key={c.key} className="px-3 py-2">
+                  <td
+                    key={c.key}
+                    className={`px-3 py-2 ${c.align === "right" ? "text-right tabular-nums" : ""}`}
+                  >
                     {c.render ? c.render(v, row) : String(v ?? "")}
                   </td>
                 );

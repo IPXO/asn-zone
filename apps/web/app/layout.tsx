@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Providers } from "./providers";
 import SeoJsonLd from "./SeoJsonLd";
 import ThemeToggle from "./ThemeToggle";
+import ActiveNav from "./components/ActiveNav";
 import { loadGlobal } from "../lib/data";
 
 export const metadata = {
@@ -47,23 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 />
               </Link>
 
-              <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
-                <Link className="hover:text-indigo-600" href="/top/ipv4">Top IPv4</Link>
-                <Link className="hover:text-indigo-600" href="/top/ipv6">Top IPv6</Link>
-                <Link className="hover:text-indigo-600" href="/search">Search</Link>
-
-                <Link
-                  className="px-2 py-1 rounded-md border border-indigo-500 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-white/10"
-                  href="/data/current/global.json"
-                  title={`Last updated: ${lastUpdatedISO}`}
-                >
-                  Dataset (JSON)
-                  <span className="ml-1 text-xs text-gray-500 dark:text-gray-400">
-                    {totalAsns} ASNs · {lastUpdatedPretty}
-                  </span>
-                </Link>
-                <ThemeToggle />
-              </nav>
+              <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4"><ActiveNav /><ThemeToggle /></nav>
             </div>
           </header>
 
