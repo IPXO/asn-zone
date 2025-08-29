@@ -1,0 +1,24 @@
+{
+  "name": "asn-zone-monorepo",
+  "private": true,
+  "packageManager": "npm@10.8.2",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.32",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unused-imports": "3.1.0",
+    "prettier": "3.3.3",
+    "typescript": "^5.3.3"
+  }
+}

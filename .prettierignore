@@ -1,0 +1,15 @@
+# Node/Next artifacts
+node_modules/
+apps/web/.next/
+apps/web/out/
+dist/
+.cache/
+coverage/
+
+# Big or generated assets
+data/snapshots/
+
+# Logs/minified
+*.log
+*.min.js
+*.min.css

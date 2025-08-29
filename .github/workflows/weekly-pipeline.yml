@@ -2,7 +2,7 @@ name: Weekly dataset snapshot
 
 on:
   schedule:
-    - cron: "0 3 * * 1" # Mondays 03:00 UTC
+    - cron: '0 3 * * 1' # Mondays 03:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -24,7 +24,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Pipeline (stub)
         run: |
@@ -57,5 +57,5 @@ jobs:
       - name: Commit snapshot
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(data): weekly snapshot ${{ steps.vars.outputs.SNAPSHOT }}"
+          commit_message: 'chore(data): weekly snapshot ${{ steps.vars.outputs.SNAPSHOT }}'
           file_pattern: data/**

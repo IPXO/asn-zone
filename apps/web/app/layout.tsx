@@ -1,21 +1,22 @@
 // apps/web/app/layout.tsx
-import "./globals.css";
-import Link from "next/link";
-import { Providers } from "./providers";
-import ThemeToggle from "./ThemeToggle";
+import './globals.css';
+import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
+import { Providers } from './providers';
+import ThemeToggle from './ThemeToggle';
 
-export const metadata = {
-  title: "asn.zone — authoritative ASN directory",
-  description: "Explore ASNs, IP space, ownership, and trends.",
-  // Favicons (Next will prefix these with basePath in production)
+export const metadata: Metadata = {
+  title: 'asn.zone — authoritative ASN directory',
+  description: 'Explore ASNs, IP space, ownership, and trends.',
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
     ],
-    shortcut: ["/favicon.ico"],
-    apple: [{ url: "/favicon.svg" }],
-  },
+    shortcut: ['/favicon.ico'],
+    apple: [{ url: '/favicon.svg' }]
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,10 +27,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">
-                {/* Use a relative path so it works with basePath on GitHub Pages */}
-                <img
-                  src="brand/logo.svg"
+                {/* Absolute path so Next adds basePath during export */}
+                <Image
+                  src="/brand/logo.svg"
                   alt="asn.zone"
+                  width={96}
+                  height={32}
+                  priority
+                  unoptimized
                   className="h-8 w-auto"
                 />
               </Link>

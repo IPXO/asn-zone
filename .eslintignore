@@ -1,0 +1,7 @@
+node_modules/
+apps/web/.next/
+apps/web/out/
+dist/
+.cache/
+coverage/
+data/snapshots/

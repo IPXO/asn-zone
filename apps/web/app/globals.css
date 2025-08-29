@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: light dark; }
+:root {
+  color-scheme: light dark;
+}

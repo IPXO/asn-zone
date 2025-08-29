@@ -9,6 +9,8 @@ pnpm-lock.yaml
 # Build artifacts
 dist/
 .cache/
+coverage/           # if you ever add Jest/coverage reports
+*.tsbuildinfo       # TypeScript incremental build info
 
 # Python
 scripts/.venv/
