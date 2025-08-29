@@ -1,6 +1,10 @@
 {
   "generated_at": "2025-08-28T00:00:00Z",
-  "stats": { "asns_total": 120000, "ipv4_announced": 2800000000, "ipv6_announced": 1500000 },
+  "stats": {
+    "asns_total": 120000,
+    "ipv4_announced": 2800000000,
+    "ipv6_announced": 1500000
+  },
   "top": {
     "ipv4": [
       { "asn": 15169, "name": "GOOGLE", "org": "Google LLC", "country": "US", "v4_slash24s": 32768 },

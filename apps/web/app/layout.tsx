@@ -8,14 +8,14 @@ import ThemeToggle from "./ThemeToggle";
 export const metadata = {
   title: "asn.zone — authoritative ASN directory",
   description: "Explore ASNs, IP space, ownership, and trends.",
-  // Use RELATIVE icon paths so they work under /asn-zone on GitHub Pages
+  // Use root-absolute paths; Next will add basePath (/asn-zone) in prod
   icons: {
     icon: [
-      { url: "favicon.ico", type: "image/x-icon" },
-      { url: "favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
-    shortcut: ["favicon.ico"],
-    apple: [{ url: "favicon.svg" }],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/favicon.svg" }],
   },
 };
 
@@ -27,9 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">
-                {/* IMPORTANT: relative path so it becomes /asn-zone/brand/logo.svg in prod */}
                 <Image
-                  src="brand/logo.svg"
+                  src="/brand/logo.svg"   // <-- root-absolute to avoid /top/brand/... 404s
                   alt="asn.zone"
                   width={120}
                   height={32}
@@ -39,15 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
 
               <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
-                <Link className="hover:text-indigo-600" href="/top/ipv4">
-                  Top IPv4
-                </Link>
-                <Link className="hover:text-indigo-600" href="/top/ipv6">
-                  Top IPv6
-                </Link>
-                <Link className="hover:text-indigo-600" href="/search">
-                  Search
-                </Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv4">Top IPv4</Link>
+                <Link className="hover:text-indigo-600" href="/top/ipv6">Top IPv6</Link>
+                <Link className="hover:text-indigo-600" href="/search">Search</Link>
                 <ThemeToggle />
               </nav>
             </div>

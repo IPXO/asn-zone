@@ -1,0 +1,19 @@
+{
+  "generated_at": "2025-08-28T00:00:00Z",
+  "stats": {
+    "asns_total": 120000,
+    "ipv4_announced": 2800000000,
+    "ipv6_announced": 1500000
+  },
+  "top": {
+    "ipv4": [
+      { "asn": 15169, "name": "GOOGLE", "org": "Google LLC", "country": "US", "v4_slash24s": 32768 },
+      { "asn": 8075,  "name": "MICROSOFT", "org": "Microsoft", "country": "US", "v4_slash24s": 24576 },
+      { "asn": 4837,  "name": "CHINA169-BACKBONE", "org": "China Unicom", "country": "CN", "v4_slash24s": 16384 }
+    ],
+    "ipv6": [
+      { "asn": 15169, "name": "GOOGLE", "org": "Google LLC", "country": "US", "v6_slots": 2048 },
+      { "asn": 8075,  "name": "MICROSOFT", "org": "Microsoft", "country": "US", "v6_slots": 1536 }
+    ]
+  }
+}
