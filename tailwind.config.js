@@ -1,36 +1,29 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  darkMode: 'class', // use `.dark` class for ThemeToggle
-  content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
+module.exports = {
+  purge: [
+    './apps/web/app/**/*.{js,ts,jsx,tsx}',
+    './apps/web/components/**/*.{js,ts,jsx,tsx}',
+    './apps/web/page.tsx',
+    './apps/web/search/page.tsx',
+    // Add other relevant files as needed
+  ],
+  darkMode: 'class', // or 'media' or 'false'
   theme: {
     extend: {
       colors: {
-        primary: '#3498db',
-        secondary: '#2ecc71',
-        danger: '#e74c3c',
-        light: '#f7f7f7',
-        dark: '#333',
-        blue: '#1e40af',
-        green: '#4caf50',
-        red: '#f44336',
-        yellow: '#ffc107',
-        orange: '#ffa726',
-        purple: '#9c27b0',
-        pink: '#ec407a',
-      },
-      spacing: {
-        '8xl': '6rem',
-        '9xl': '8rem',
-      },
-      container: {
-        center: true,
-        padding: '1rem',
-        screens: {
-          '2xl': '64rem',
+        indigo: '#4a90e2',
+        green: '#68d391',
+        gray: {
+          50: '#f7fafc',
+          100: '#edf2f7',
+          200: '#e2e8f0',
+          300: '#cbd5e0',
+          400: '#a0aec0',
+          500: '#6b7280',
+          600: '#4a5568',
+          700: '#374151',
+          800: '#2e3440',
+          900: '#232f3e',
         },
-      },
-      fontFamily: {
-        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
     },
   },
