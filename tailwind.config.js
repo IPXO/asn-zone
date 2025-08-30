@@ -74,6 +74,13 @@ module.exports = {
         },
       },
     },
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        '2xl': '64rem',
+      },
+    },
   },
   variants: {
     extend: {},
