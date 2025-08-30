@@ -6,7 +6,7 @@ module.exports = {
     './apps/web/search/page.tsx',
     // Add other relevant files as needed
   ],
-  darkMode: 'class', // Ensure dark mode is set to 'class'
+  darkMode: 'class', // or 'media' or 'false'
   theme: {
     extend: {
       colors: {
