@@ -1,36 +1,105 @@
+# ------------------------------
 # Node / Next.js
+# ------------------------------
 node_modules/
 apps/web/.next/
 apps/web/out/
-npm-debug.log*
-yarn.lock
-pnpm-lock.yaml
-
-# Build artifacts
+.next/
+out/
 dist/
 .cache/
-coverage/           # if you ever add Jest/coverage reports
-*.tsbuildinfo       # TypeScript incremental build info
+.eslintcache
+*.tsbuildinfo
 
-# Python
+# Lockfiles (choose ONE package manager; we use npm)
+# yarn.lock
+# pnpm-lock.yaml
+
+# ------------------------------
+# Build & coverage
+# ------------------------------
+coverage/
+*.lcov
+
+# ------------------------------
+# App-specific data (if ever generated)
+# ------------------------------
+apps/web/data/generated/
+apps/web/public/assets/generated/
+
+# ------------------------------
+# Python (scripts, helpers)
+# ------------------------------
 scripts/.venv/
 __pycache__/
 *.pyc
 
-# OS / Editor junk
+# ------------------------------
+# ChatOps (keep scripts, ignore logs/temp)
+# ------------------------------
+.chatops/*.log
+.chatops/last.log
+.chatops/tmp/
+.chatops/cache/
+
+# ------------------------------
+# Aider (KEEP config, ignore state/history)
+# ------------------------------
+.aider.chat.*
+.aider*cache*
+.aider*state*
+# allow config
+!.aider.conf.yml
+
+# ------------------------------
+# Testing tools
+# ------------------------------
+# Playwright
+playwright-report/
+test-results/
+.gplaywright/
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/reports/
+
+# ------------------------------
+# Tooling / platform dirs
+# ------------------------------
+.vercel/
+.turbo/
+.parcel-cache/
+
+# ------------------------------
+# Editors / OS
+# ------------------------------
 .DS_Store
 Thumbs.db
 *.swp
 .idea/
 .vscode/
+*.code-workspace
+._*
+Icon?
 
+# ------------------------------
 # Env files
+# ------------------------------
 .env
 .env.local
 .env.*.local
 
+# ------------------------------
 # Logs
+# ------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 *.log
-logs/.chatops/last.log
-.chatops/last.log
-.aider*
+
+# ------------------------------
+# Large model files (if ever added by mistake)
+# ------------------------------
+*.gguf
+
