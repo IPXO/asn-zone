@@ -22,6 +22,13 @@ export default {
         '8xl': '6rem',
         '9xl': '8rem',
       },
+      container: {
+        center: true,
+        padding: '1rem',
+        screens: {
+          '2xl': '64rem',
+        },
+      },
     },
   },
   variants: {
