@@ -5,3 +5,26 @@
 :root {
   color-scheme: light dark;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  @apply bg-indigo-600 text-white;
+}
+
+a {
+  @apply underline-offset-2;
+}
+
+body {
+  font-family: 'system-ui', sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
