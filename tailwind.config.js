@@ -29,6 +29,9 @@ export default {
           '2xl': '64rem',
         },
       },
+      fontFamily: {
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
     },
   },
   variants: {
