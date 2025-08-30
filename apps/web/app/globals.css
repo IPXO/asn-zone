@@ -9,3 +9,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+::selection {
+  @apply bg-indigo-600 text-white;
+}
