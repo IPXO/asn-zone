@@ -81,6 +81,9 @@ module.exports = {
         '2xl': '64rem',
       },
     },
+    fontFamily: {
+      sans: ['system-ui', 'sans-serif'],
+    },
   },
   variants: {
     extend: {},
