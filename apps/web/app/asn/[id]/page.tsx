@@ -37,7 +37,6 @@ export default async function AsnPage({ params }: { params: { id: string } }) {
     <div className="space-y-6">
       <JsonLd
         data={asnThingJsonLd({
-
           asn: a.asn,
           name: a.name,
           org: a.org,
