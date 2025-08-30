@@ -24,11 +24,77 @@ module.exports = {
           800: '#2e3440',
           900: '#232f3e',
         },
+        blue: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+        red: {
+          50: '#fff5f5',
+          100: '#ffe4e6',
+          200: '#ffcccd',
+          300: '#ffa7a8',
+          400: '#ff8b92',
+          500: '#ff787d',
+          600: '#ff6b72',
+          700: '#f14146',
+          800: '#e13034',
+          900: '#c42f30',
+        },
+        yellow: {
+          50: '#fff9db',
+          100: '#ffecb3',
+          200: '#ffe799',
+          300: '#ffd67a',
+          400: '#ffc45f',
+          500: '#ffa84d',
+          600: '#ff9533',
+          700: '#f77c12',
+          800: '#e06b1a',
+          900: '#c25115',
+        },
+        orange: {
+          50: '#fff9db',
+          100: '#ffecc9',
+          200: '#ffd4a2',
+          300: '#ffc069',
+          400: '#ffa733',
+          500: '#ff8f1e',
+          600: '#ff7800',
+          700: '#f55b00',
+          800: '#da4700',
+          900: '#c23c00',
+        },
       },
+    },
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        '2xl': '64rem',
+      },
+    },
+    fontFamily: {
+      sans: ['system-ui', 'sans-serif'],
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.bg-opacity-50': { backgroundColor: 'rgba(255, 255, 255, 0.5)' },
+        '.text-opacity-75': { color: 'rgba(0, 0, 0, 0.75)' },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 };
