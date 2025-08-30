@@ -45,12 +45,10 @@ export default async function AsnPage({ params }: { params: { id: string } }) {
         })}
       />
 
-      <Breadcrumbs
-        items={[
-          { href: "/", label: "Home" },
-          { label: `AS${a.asn}` },
-        ]}
-      />
+      <Breadcrumbs items={[
+        { href: "/", label: "Home" },
+        { label: `AS${a.asn}` },
+      ]} />
 
       <div>
         <h1 className="text-2xl font-semibold">AS{a.asn} — {a.name}</h1>
