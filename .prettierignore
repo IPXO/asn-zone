@@ -1,11 +1,4 @@
-# Build artifacts
-.next/
-out/
-apps/web/.next/
-apps/web/out/
-
-# Dependencies
-node_modules/
-
-# Generated manifests
-**/package-lock.json
+.next
+out
+node_modules
+*.log

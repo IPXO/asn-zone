@@ -9,7 +9,8 @@
     "mkroute": "node ./scripts/mkroute.mjs",
     "format": "prettier --write \"app/**/*.{ts,tsx,css}\" \"components/**/*.tsx\" \"lib/**/*.{ts,tsx}\" \"scripts/**/*.{js,mjs,sh}\"",
     "format:check": "prettier --check \"app/**/*.{ts,tsx,css}\" \"components/**/*.tsx\" \"lib/**/*.{ts,tsx}\" \"scripts/**/*.{js,mjs,sh}\"",
-    "export:local": "rm -rf out && next build"
+    "export:local": "rm -rf out && next build",
+    "dataset:build": "ts-node --transpile-only ../../tools/build-dataset.ts"
   },
   "dependencies": {
     "next": "^14.2.32",
