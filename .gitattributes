@@ -1,23 +1,35 @@
-# Auto-normalize text files
-* text=auto
+# Normalize line endings and prefer LF everywhere (macOS/Linux/CI/GitHub Pages)
+* text=auto eol=lf
 
-# Force LF for source files
-*.js   text eol=lf
-*.jsx  text eol=lf
-*.ts   text eol=lf
-*.tsx  text eol=lf
-*.css  text eol=lf
-*.md   text eol=lf
-*.yml  text eol=lf
-*.yaml text eol=lf
-*.json text eol=lf
-
-# Images/binaries
+# Binary assets (no diffs)
 *.png  binary
 *.jpg  binary
 *.jpeg binary
 *.gif  binary
+*.webp binary
+*.svg  text  # keep as text so diffs/blame work
 *.ico  binary
+*.pdf  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.eot  binary
 
-# SVGs are text (diffable)
-*.svg  text eol=lf
+# Improve diffs for lockfiles
+package-lock.json -diff
+pnpm-lock.yaml   -diff
+yarn.lock        -diff
+
+# TypeScript/JSX get better diffs hint (optional)
+*.tsx text eol=lf diff=ts
+*.ts  text eol=lf diff=ts
+*.jsx text eol=lf
+*.js  text eol=lf
+
+# Mark common generated outputs as linguist-generated on GitHub (won’t affect builds)
+apps/web/.next/** linguist-generated
+out/**            linguist-generated
+
+# Keep patch formatting stable for these
+*.patch eol=lf
+*.diff  eol=lf

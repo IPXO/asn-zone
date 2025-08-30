@@ -1,14 +1,41 @@
-# EditorConfig helps maintain consistent coding styles across editors
+# EditorConfig helps maintain consistent coding styles across editors/IDEs
+# Docs: https://editorconfig.org
 
 root = true
 
 [*]
-end_of_line = lf
 charset = utf-8
-indent_style = space
-indent_size = 2
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
 
-[*.md]
+# Makefiles need tabs
+[Makefile]
+indent_style = tab
+indent_size = 4
+
+# Markdown/MDX - keep trailing spaces (for hard line breaks)
+[*.{md,mdx}]
 trim_trailing_whitespace = false
+
+# JSON, YAML - enforce 2 spaces
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# TypeScript / JavaScript / TSX / JSX
+[*.{ts,tsx,js,jsx,cjs,mjs}]
+indent_style = space
+indent_size = 2
+
+# CSS/PostCSS/Tailwind configs
+[*.{css,pcss,scss}]
+indent_style = space
+indent_size = 2
+
+# Shell / Bash
+[*.{sh,bash}]
+indent_style = space
+indent_size = 2
