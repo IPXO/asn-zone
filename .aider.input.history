@@ -223,3 +223,69 @@
 
 # 2025-08-31 11:42:35.669250
 +Improve apps/web/app/search/SearchClient.tsx: add 200ms debounce to the input filter; highlight matched substrings in ASN, Name, and Org using a <mark> wrapper; do not change dataset or routing. Keep accessibility: ensure aria-live polite updates for result count.
+
+# 2025-08-31 11:47:15.309741
++Update apps/web/components/SortableTable.tsx to support:
++- columns: { key: string; label: string; href?: (row: Record<string, any>) => string; format?: (value: any, row: Record<string, any>) => React.ReactNode }
++- If a column has 'href', wrap the cell content with <Link href={href(row)}>…</Link>
++- Keep existing sort behavior intact.
++
++Refactor pages to use SortableTable with proper links & formatting:
++1) apps/web/app/country/[cc]/page.tsx
++   - Show ASNs for the country using SortableTable.
++   - Columns:
++     • asn (href: (r) => `/asn/${r.asn}`)
++     • name (plain)
++     • org  (href: (r) => `/org/${encodeURIComponent(r.org)}`)
++     • country (href: (r) => `/country/${r.country}`)
++     • v4_slash24s (format: thousands with toLocaleString)
++     • v6_slots    (format: thousands with toLocaleString)
++   - Remove old Table import.
++
++2) apps/web/app/org/[name]/page.tsx
++   - Show ASNs for the org using SortableTable.
++   - Same columns & linking rules as above.
++
++3) apps/web/app/top/ipv4/page.tsx and apps/web/app/top/ipv6/page.tsx
++   - Switch to SortableTable.
++   - Use same columns & linking.
++   - Default sort: v4 page sorts by v4_slash24s desc; v6 page sorts by v6_slots desc (preserve existing sorting UX).
++
++Notes:
++- SortableTable remains a client component; pages stay server components (no 'use client' in pages).
++- Keep existing data helpers and dataset as-is.
++- Fix imports accordingly.
++- Ensure typecheck passes.
+
+# 2025-08-31 11:47:15.310447
++Update apps/web/components/SortableTable.tsx to support:
++- columns: { key: string; label: string; href?: (row: Record<string, any>) => string; format?: (value: any, row: Record<string, any>) => React.ReactNode }
++- If a column has 'href', wrap the cell content with <Link href={href(row)}>…</Link>
++- Keep existing sort behavior intact.
++
++Refactor pages to use SortableTable with proper links & formatting:
++1) apps/web/app/country/[cc]/page.tsx
++   - Show ASNs for the country using SortableTable.
++   - Columns:
++     • asn (href: (r) => `/asn/${r.asn}`)
++     • name (plain)
++     • org  (href: (r) => `/org/${encodeURIComponent(r.org)}`)
++     • country (href: (r) => `/country/${r.country}`)
++     • v4_slash24s (format: thousands with toLocaleString)
++     • v6_slots    (format: thousands with toLocaleString)
++   - Remove old Table import.
++
++2) apps/web/app/org/[name]/page.tsx
++   - Show ASNs for the org using SortableTable.
++   - Same columns & linking rules as above.
++
++3) apps/web/app/top/ipv4/page.tsx and apps/web/app/top/ipv6/page.tsx
++   - Switch to SortableTable.
++   - Use same columns & linking.
++   - Default sort: v4 page sorts by v4_slash24s desc; v6 page sorts by v6_slots desc (preserve existing sorting UX).
++
++Notes:
++- SortableTable remains a client component; pages stay server components (no 'use client' in pages).
++- Keep existing data helpers and dataset as-is.
++- Fix imports accordingly.
++- Ensure typecheck passes.
