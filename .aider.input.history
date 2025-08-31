@@ -205,3 +205,15 @@
 
 # 2025-08-30 18:21:02.316166
 +Do not rename or move any files. Keep changes minimal and additive.
+
+# 2025-08-31 11:27:44.864669
++Create Header.tsx and Footer.tsx under apps/web/app/components/ui. Move nav/brand links from layout.tsx into <Header/>, simple footer with © and links (GitHub, Privacy placeholder). Update apps/web/app/layout.tsx to use <Header/> and <Footer/>. Keep Tailwind classes minimal and consistent with current design. Do not change routing or SEO components.
+
+# 2025-08-31 11:27:44.865344
++Create Header.tsx and Footer.tsx under apps/web/app/components/ui. Move nav/brand links from layout.tsx into <Header/>, simple footer with © and links (GitHub, Privacy placeholder). Update apps/web/app/layout.tsx to use <Header/> and <Footer/>. Keep Tailwind classes minimal and consistent with current design. Do not change routing or SEO components.
+
+# 2025-08-31 11:39:31.891175
++Refactor apps/web/app/country/[cc]/page.tsx and apps/web/app/org/[name]/page.tsx to use apps/web/components/SortableTable.tsx instead of Table. Preserve current data-loading from lib/data.ts and existing metadata/JsonLd. Make columns sortable: ASN (numeric), Name (alpha), Org (alpha), Country (alpha), and the size column (v4_slash24s for country IPv4 rows or v6_slots where applicable). Keep routes/links unchanged.
+
+# 2025-08-31 11:39:31.891346
++Refactor apps/web/app/country/[cc]/page.tsx and apps/web/app/org/[name]/page.tsx to use apps/web/components/SortableTable.tsx instead of Table. Preserve current data-loading from lib/data.ts and existing metadata/JsonLd. Make columns sortable: ASN (numeric), Name (alpha), Org (alpha), Country (alpha), and the size column (v4_slash24s for country IPv4 rows or v6_slots where applicable). Keep routes/links unchanged.
