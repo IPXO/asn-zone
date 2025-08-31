@@ -1,0 +1,17 @@
+Task: Enrich ASN detail page.
+
+Files to edit:
+- apps/web/app/asn/[id]/page.tsx
+- apps/web/lib/data.ts
+
+Requirements:
+- Show cards for /24s and IPv6 slots if present.
+- Add a small details section with:
+  • Org (linked to /org/<org>)
+  • Country (linked to /country/<CC>)
+  • Name
+- Add JSON-LD: use <SeoJsonLd json={...}> with an "Organization" or "Thing" node for the ASN.
+  Use url: `${process.env.NEXT_PUBLIC_BASE_PATH || '/asn-zone'}/asn/${id}`
+- Keep output: 'export' compatibility (generateStaticParams present; no runtime fetch).
+- Maintain basePath routing and link patterns.
+- Small, focused diffs. Keep the build green.
