@@ -33,3 +33,5 @@ Thumbs.db
 !.gitignore
 !.gitattributes
 !.aider.conf.yml
+# binary assets (exclude from Aider context)
+apps/web/public/**/*.{ico,png,jpg,jpeg,gif,webp,svg,woff,woff2,ttf,eot}
