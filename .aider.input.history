@@ -289,3 +289,117 @@
 +- Keep existing data helpers and dataset as-is.
 +- Fix imports accordingly.
 +- Ensure typecheck passes.
+
+# 2025-08-31 12:07:52.943992
++-- Task: Enrich ASN detail page.
++
++Files to edit:
++- apps/web/app/asn/[id]/page.tsx
++- apps/web/lib/data.ts
++
++Requirements:
++- Show cards for /24s and IPv6 slots if present.
++- Add a small details section with:
++  • Org (linked to /org/<org>)
++  • Country (linked to /country/<CC>)
++  • Name
++- Add JSON-LD: use <SeoJsonLd json={...}> with an "Organization" or "Thing" node for the ASN.
++  Use url: `${process.env.NEXT_PUBLIC_BASE_PATH || '/asn-zone'}/asn/${id}`
++- Keep output: 'export' compatibility (generateStaticParams present; no runtime fetch).
++- Maintain basePath routing and link patterns.
++- Small, focused diffs. Keep the build green.
+
+# 2025-08-31 12:07:52.944475
++-- Task: Enrich ASN detail page.
++
++Files to edit:
++- apps/web/app/asn/[id]/page.tsx
++- apps/web/lib/data.ts
++
++Requirements:
++- Show cards for /24s and IPv6 slots if present.
++- Add a small details section with:
++  • Org (linked to /org/<org>)
++  • Country (linked to /country/<CC>)
++  • Name
++- Add JSON-LD: use <SeoJsonLd json={...}> with an "Organization" or "Thing" node for the ASN.
++  Use url: `${process.env.NEXT_PUBLIC_BASE_PATH || '/asn-zone'}/asn/${id}`
++- Keep output: 'export' compatibility (generateStaticParams present; no runtime fetch).
++- Maintain basePath routing and link patterns.
++- Small, focused diffs. Keep the build green.
+
+# 2025-08-31 12:20:41.997446
++Task: Make tables sortable with preserved link cells.
++Files to edit:
++- apps/web/components/SortableTable.tsx
++- apps/web/app/top/ipv4/page.tsx
++- apps/web/app/top/ipv6/page.tsx
++Requirements:
++- Click header toggles asc/desc; show ▲/▼ indicator.
++- When a column has kind "asn"/"org"/"country", keep <Link> wrapping.
++- Numeric sorts for v4_slash24s/v6_slots; string sorts for others.
++- No client data fetch; all data passed via props.
++- Keep build green.
++
+
+# 2025-08-31 12:20:41.997864
++Task: Make tables sortable with preserved link cells.
++Files to edit:
++- apps/web/components/SortableTable.tsx
++- apps/web/app/top/ipv4/page.tsx
++- apps/web/app/top/ipv6/page.tsx
++Requirements:
++- Click header toggles asc/desc; show ▲/▼ indicator.
++- When a column has kind "asn"/"org"/"country", keep <Link> wrapping.
++- Numeric sorts for v4_slash24s/v6_slots; string sorts for others.
++- No client data fetch; all data passed via props.
++- Keep build green.
++
+
+# 2025-08-31 12:41:12.287311
++Task: Improve search UX: debounce & highlight.
++Files to edit:
++- apps/web/app/search/SearchClient.tsx
++Requirements:
++- Add 250–300ms debounce before filtering.
++- Highlight matching substrings in results (wrap with <mark>).
++- Keyboard: Up/Down to navigate, Enter to open, Esc clears.
++- No network fetch; keep export mode compatible.
++- Keep build green.
++
+
+# 2025-08-31 12:41:12.287491
++Task: Improve search UX: debounce & highlight.
++Files to edit:
++- apps/web/app/search/SearchClient.tsx
++Requirements:
++- Add 250–300ms debounce before filtering.
++- Highlight matching substrings in results (wrap with <mark>).
++- Keyboard: Up/Down to navigate, Enter to open, Esc clears.
++- No network fetch; keep export mode compatible.
++- Keep build green.
++
+
+# 2025-08-31 12:42:37.195008
++Task: Footer & site JSON-LD.
++Files to edit:
++- apps/web/app/layout.tsx
++- apps/web/app/components/Footer.tsx (create if missing)
++Requirements:
++- Footer: links to Home, Top IPv4, Top IPv6, Dataset (JSON), Search.
++- Use <SeoJsonLd json={...}> at layout-level with WebSite JSON-LD.
++- Respect basePath for links.
++- Keep build green.
++
+
+# 2025-08-31 12:42:37.195301
++Task: Footer & site JSON-LD.
++Files to edit:
++- apps/web/app/layout.tsx
++- apps/web/app/components/Footer.tsx (create if missing)
++Requirements:
++- Footer: links to Home, Top IPv4, Top IPv6, Dataset (JSON), Search.
++- Use <SeoJsonLd json={...}> at layout-level with WebSite JSON-LD.
++- Respect basePath for links.
++- Keep build green.
++
