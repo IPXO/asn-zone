@@ -1,0 +1,8 @@
+model: ollama/qwen2.5-coder:7b
+editor-model: ollama/qwen2.5-coder:7b
+yes-always: true
+auto-commits: true
+dirty-commits: false
+attribute-author: false
+detect-urls: false
+map-tokens: 1500

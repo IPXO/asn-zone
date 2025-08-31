@@ -1,15 +1,15 @@
-import Link from "next/link";
-import Table from "../components/Table";
-import { loadGlobal, getTopIPv4, getTopIPv6 } from "../lib/data";
+import Link from 'next/link';
+import Table from '../components/Table';
+import { loadGlobal, getTopIPv4, getTopIPv6 } from '../lib/data';
 
-export const metadata = { title: "asn.zone — authoritative ASN directory" };
+export const metadata = { title: 'asn.zone — authoritative ASN directory' };
 
 export default async function Home() {
   const global = await loadGlobal();
   const top4 = getTopIPv4(global).slice(0, 10);
   const top6 = getTopIPv6(global).slice(0, 10);
 
-  const fmt = (n: number) => n.toLocaleString("en-US");
+  const fmt = (n: number) => n.toLocaleString('en-US');
 
   return (
     <div className="space-y-8">
@@ -32,15 +32,17 @@ export default async function Home() {
         <div>
           <div className="flex items-center justify-between mb-2">
             <h2 className="font-semibold">Top IPv4</h2>
-            <Link className="text-sm text-indigo-600" href="/top/ipv4">view all</Link>
+            <Link className="text-sm text-indigo-600" href="/top/ipv4">
+              view all
+            </Link>
           </div>
           <Table
             columns={[
-              { key: "asn", label: "ASN", kind: "asn" },
-              { key: "name", label: "Name" },
-              { key: "org", label: "Org", kind: "org" },
-              { key: "country", label: "CC", kind: "country" },
-              { key: "v4_slash24s", label: "/24s", kind: "number" },
+              { key: 'asn', label: 'ASN', kind: 'asn' },
+              { key: 'name', label: 'Name' },
+              { key: 'org', label: 'Org', kind: 'org' },
+              { key: 'country', label: 'CC', kind: 'country' },
+              { key: 'v4_slash24s', label: '/24s', kind: 'number' },
             ]}
             rows={top4 as unknown as Record<string, any>[]}
           />
@@ -49,15 +51,17 @@ export default async function Home() {
         <div>
           <div className="flex items-center justify-between mb-2">
             <h2 className="font-semibold">Top IPv6</h2>
-            <Link className="text-sm text-indigo-600" href="/top/ipv6">view all</Link>
+            <Link className="text-sm text-indigo-600" href="/top/ipv6">
+              view all
+            </Link>
           </div>
           <Table
             columns={[
-              { key: "asn", label: "ASN", kind: "asn" },
-              { key: "name", label: "Name" },
-              { key: "org", label: "Org", kind: "org" },
-              { key: "country", label: "CC", kind: "country" },
-              { key: "v6_slots", label: "slots", kind: "number" },
+              { key: 'asn', label: 'ASN', kind: 'asn' },
+              { key: 'name', label: 'Name' },
+              { key: 'org', label: 'Org', kind: 'org' },
+              { key: 'country', label: 'CC', kind: 'country' },
+              { key: 'v6_slots', label: 'slots', kind: 'number' },
             ]}
             rows={top6 as unknown as Record<string, any>[]}
           />

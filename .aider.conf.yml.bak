@@ -1,0 +1,17 @@
+model: ollama/llama3.1
+editor-model: ollama/llama3.1
+weak-model: ollama/llama3.1
+
+yes-always: true
+auto-commits: true
+commit: true
+
+# Keep this simple for broad compatibility
+map-tokens: 1500
+read: true
+detect-urls: true
+
+# Keep commits tidy
+commit-prompt: |
+  Write a concise conventional commit subject (max ~72 chars).
+  Use types like feat, fix, chore, docs, refactor, test, build.

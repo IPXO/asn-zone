@@ -9,22 +9,25 @@ export default function SearchClient() {
   const g = getGlobalSync();
   const all = useMemo(
     () => [
-      ...g.top.ipv4.map(r => ({ ...r, family: 'v4' as const })),
-      ...g.top.ipv6.map(r => ({ ...r, family: 'v6' as const })),
+      ...g.top.ipv4.map((r) => ({ ...r, family: 'v4' as const })),
+      ...g.top.ipv6.map((r) => ({ ...r, family: 'v6' as const })),
     ],
-    [g]
+    [g],
   );
 
   const [q, setQ] = useState('');
   const rows = useMemo(() => {
     const s = q.trim().toLowerCase();
     if (!s) return all.slice(0, 50);
-    return all.filter(r =>
-      String(r.asn).includes(s) ||
-      r.name.toLowerCase().includes(s) ||
-      r.org.toLowerCase().includes(s) ||
-      r.country.toLowerCase().includes(s)
-    ).slice(0, 200);
+    return all
+      .filter(
+        (r) =>
+          String(r.asn).includes(s) ||
+          r.name.toLowerCase().includes(s) ||
+          r.org.toLowerCase().includes(s) ||
+          r.country.toLowerCase().includes(s),
+      )
+      .slice(0, 200);
   }, [q, all]);
 
   return (
@@ -38,7 +41,15 @@ export default function SearchClient() {
       />
       <Table
         columns={[
-          { key: 'asn', label: 'ASN', render: (v) => <Link className="text-indigo-600" href={`/asn/${v}`}>AS{v}</Link> },
+          {
+            key: 'asn',
+            label: 'ASN',
+            render: (v) => (
+              <Link className="text-indigo-600" href={`/asn/${v}`}>
+                AS{v}
+              </Link>
+            ),
+          },
           { key: 'name', label: 'Name' },
           { key: 'org', label: 'Org' },
           { key: 'country', label: 'CC' },

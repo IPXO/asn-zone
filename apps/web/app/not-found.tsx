@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
@@ -8,7 +8,10 @@ export default function NotFound() {
         We couldn’t find that page. Try the search or go back home.
       </p>
       <div className="flex gap-3 justify-center">
-        <Link href="/search" className="px-4 py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-white/5">
+        <Link
+          href="/search"
+          className="px-4 py-2 rounded-xl border hover:bg-gray-50 dark:hover:bg-white/5"
+        >
           Search
         </Link>
         <Link href="/" className="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:opacity-90">

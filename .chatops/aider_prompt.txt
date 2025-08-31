@@ -1,0 +1,36 @@
+You are Aider in non-interactive mode. Your job:
+- Fix the Next.js TypeScript build for apps/web so that `npm run build` succeeds.
+- Make minimal, targeted changes in the repo.
+- Respect current Next.js 14 app router & `output: 'export'`.
+- Do not remove existing features (sitemap, robots, Json-LD, dynamic routes).
+- If an import fails because an export is missing (e.g. `itemListJsonLd`), create a properly typed helper in apps/web/lib/seo.ts and export it.
+  - `JsonLd(props: { data: unknown })` should stay typed and safe (no `any`).
+  - Add `itemListJsonLd(items: { url: string; name?: string }[])` that returns a valid schema.org ItemList object:
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": items.map((it, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        ...(it.name ? { "name": it.name } : {}),
+        "url": it.url
+      }))
+    }
+- If a page imports it (country/org listings), fix the imports only (do not rename unrelated code).
+- Keep named export `asnThingJsonLd` as-is.
+- If ESLint custom rule directives reference missing plugins (like @typescript-eslint/no-explicit-any), remove the directive (don’t add new deps).
+
+Implementation notes:
+- Only edit files under apps/web unless absolutely necessary.
+- Run Prettier style on changed files as part of the commit.
+- Write clear, conventional commits like: `fix(build): add itemListJsonLd to seo helpers`
+
+Now, here are the exact, most recent build errors (tail):
+```text
+Failed to compile.
+
+./lib/seo.ts
+35:5  Error: Definition for rule '@typescript-eslint/no-explicit-any' was not found.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+```

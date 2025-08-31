@@ -1,5 +1,5 @@
-import React from "react";
-import Card, { CardContent } from "./ui/Card";
+import React from 'react';
+import Card, { CardContent } from './ui/Card';
 
 export default function Stat({
   label,

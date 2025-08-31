@@ -1,0 +1,16 @@
+# Keep aider fast & focused
+auto-commits = true
+commit-prompt = "concise"
+dirty-commits = "ask"
+editor-model = "gpt-4o-mini"
+model = "gpt-4o-mini"
+litellm = false
+
+# Don’t feed build artefacts
+ignore = [
+  ".git",
+  "node_modules",
+  "apps/web/.next",
+  "apps/web/out",
+  ".chatops/last.log"
+]

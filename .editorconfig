@@ -35,6 +35,11 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
+# HTML
+[*.{html,htm}]
+indent_style = space
+indent_size = 2
+
 # Shell / Bash
 [*.{sh,bash}]
 indent_style = space

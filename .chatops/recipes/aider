@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# Run from repo root, edit files under apps/web
+cd apps/web
+# Use your existing .aider.conf.yml; --yes makes it non-interactive
+aider --yes --message "$*"
