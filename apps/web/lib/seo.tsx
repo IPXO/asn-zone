@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const DEFAULT_BASE =
-  process.env.NEXT_PUBLIC_CANONICAL ||
-  "https://ipxo.github.io/asn-zone";
+const DEFAULT_BASE = process.env.NEXT_PUBLIC_CANONICAL || 'https://ipxo.github.io/asn-zone';
 
 /** Make a URL absolute against the canonical base */
 export function absolute(pathOrUrl: string): string {
@@ -11,8 +9,8 @@ export function absolute(pathOrUrl: string): string {
     const u = new URL(pathOrUrl);
     return u.toString(); // already absolute
   } catch {
-    const base = DEFAULT_BASE.endsWith("/") ? DEFAULT_BASE : DEFAULT_BASE + "/";
-    const rel = String(pathOrUrl).replace(/^\/+/, "");
+    const base = DEFAULT_BASE.endsWith('/') ? DEFAULT_BASE : DEFAULT_BASE + '/';
+    const rel = String(pathOrUrl).replace(/^\/+/, '');
     return new URL(rel, base).toString();
   }
 }
@@ -28,14 +26,14 @@ export function JsonLd({ json }: { json: unknown }) {
 export function siteJsonLd() {
   const base = DEFAULT_BASE;
   return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
     url: base,
-    name: "asn.zone",
+    name: 'asn.zone',
     potentialAction: {
-      "@type": "SearchAction",
+      '@type': 'SearchAction',
       target: `${base}/search?q={query}`,
-      "query-input": "required name=query",
+      'query-input': 'required name=query',
     },
   };
 }
@@ -43,10 +41,10 @@ export function siteJsonLd() {
 /** Generic ItemList JSON-LD (expects absolute-able urls) */
 export function itemListJsonLd(items: { url: string; name?: string }[]) {
   return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
     itemListElement: items.map((it, i) => ({
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: i + 1,
       url: absolute(it.url),
       ...(it.name ? { name: it.name } : {}),
@@ -63,15 +61,15 @@ export function asnThingJsonLd(asn: {
 }) {
   const url = absolute(`/asn/${asn.asn}`);
   return {
-    "@context": "https://schema.org",
-    "@type": "Thing",
-    name: `AS${asn.asn}${asn.name ? ` — ${asn.name}` : ""}`,
+    '@context': 'https://schema.org',
+    '@type': 'Thing',
+    name: `AS${asn.asn}${asn.name ? ` — ${asn.name}` : ''}`,
     url,
     identifier: `AS${asn.asn}`,
     ...(asn.org
       ? {
           provider: {
-            "@type": "Organization",
+            '@type': 'Organization',
             name: asn.org,
           },
         }
