@@ -35,3 +35,9 @@ Thumbs.db
 !.aider.conf.yml
 # binary assets (exclude from Aider context)
 apps/web/public/**/*.{ico,png,jpg,jpeg,gif,webp,svg,woff,woff2,ttf,eot}
+
+# Ignore binary assets for Aider
+apps/web/public/*.ico
+apps/web/public/*.png
+apps/web/public/*.jpg
+apps/web/public/*.jpeg

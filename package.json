@@ -7,7 +7,10 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs",
     "lint:fix": "npm run lint -- --fix",
-    "mkroute": "node scripts/mkroute.mjs"
+    "mkroute": "node scripts/mkroute.mjs",
+    "build": "npm -C apps/web run build",
+    "dev": "npm -C apps/web run dev",
+    "start": "npm -C apps/web run start"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "6.21.0",
