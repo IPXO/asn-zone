@@ -105,3 +105,4 @@ pnpm-debug.log*
 *.pt
 *.onnx
 *.safetensors
+.aider*

@@ -2,6 +2,7 @@ import React from 'react';
 
 const DEFAULT_BASE = process.env.NEXT_PUBLIC_CANONICAL || 'https://ipxo.github.io/asn-zone';
 
+/** Make a URL absolute against the canonical base */
 export function absolute(pathOrUrl: string): string {
   if (!pathOrUrl) return DEFAULT_BASE;
   try {
@@ -14,38 +15,37 @@ export function absolute(pathOrUrl: string): string {
   }
 }
 
-/** Inline JSON-LD helper */
+/** Inline JSON-LD helper (script tag) */
 export function JsonLd({ json }: { json: unknown }) {
   const content = JSON.stringify(json);
   // eslint-disable-next-line react/no-danger
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: content }} />;
 }
 
-/** Site-level JSON-LD (basic WebSite schema) */
+/** Site-level JSON-LD (WebSite) */
 export function siteJsonLd() {
-  const url = absolute('/');
+  const base = DEFAULT_BASE;
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    url,
+    url: base,
     name: 'asn.zone',
-    description: 'Autonomous System stats, rankings and lookups.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${absolute('/search')}?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
+      target: `${base}/search?q={query}`,
+      'query-input': 'required name=query',
     },
   };
 }
 
-/** Generic ItemList JSON-LD for listing pages */
-export function itemListJsonLd(items: Array<{ url: string; name?: string }>) {
+/** Generic ItemList JSON-LD (expects absolute-able urls) */
+export function itemListJsonLd(items: { url: string; name?: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: items.map((it, index) => ({
+    itemListElement: items.map((it, i) => ({
       '@type': 'ListItem',
-      position: index + 1,
+      position: i + 1,
       url: absolute(it.url),
       ...(it.name ? { name: it.name } : {}),
     })),
@@ -54,7 +54,7 @@ export function itemListJsonLd(items: Array<{ url: string; name?: string }>) {
 
 /** ASN Thing JSON-LD for detail pages */
 export function asnThingJsonLd(asn: {
-  asn: number | string;
+  asn: number;
   name?: string;
   org?: string;
   country?: string;
@@ -64,8 +64,16 @@ export function asnThingJsonLd(asn: {
     '@context': 'https://schema.org',
     '@type': 'Thing',
     name: `AS${asn.asn}${asn.name ? ` — ${asn.name}` : ''}`,
-    url: url,
-    ...(asn.org ? { additionalType: 'Organization', disambiguatingDescription: asn.org } : {}),
-    ...(asn.country ? { identifier: `CC=${asn.country}` } : {}),
+    url,
+    identifier: `AS${asn.asn}`,
+    ...(asn.org
+      ? {
+          provider: {
+            '@type': 'Organization',
+            name: asn.org,
+          },
+        }
+      : {}),
+    ...(asn.country ? { areaServed: asn.country } : {}),
   };
 }

@@ -205,3 +205,201 @@
 
 # 2025-08-30 18:21:02.316166
 +Do not rename or move any files. Keep changes minimal and additive.
+
+# 2025-08-31 11:27:44.864669
++Create Header.tsx and Footer.tsx under apps/web/app/components/ui. Move nav/brand links from layout.tsx into <Header/>, simple footer with © and links (GitHub, Privacy placeholder). Update apps/web/app/layout.tsx to use <Header/> and <Footer/>. Keep Tailwind classes minimal and consistent with current design. Do not change routing or SEO components.
+
+# 2025-08-31 11:27:44.865344
++Create Header.tsx and Footer.tsx under apps/web/app/components/ui. Move nav/brand links from layout.tsx into <Header/>, simple footer with © and links (GitHub, Privacy placeholder). Update apps/web/app/layout.tsx to use <Header/> and <Footer/>. Keep Tailwind classes minimal and consistent with current design. Do not change routing or SEO components.
+
+# 2025-08-31 11:39:31.891175
++Refactor apps/web/app/country/[cc]/page.tsx and apps/web/app/org/[name]/page.tsx to use apps/web/components/SortableTable.tsx instead of Table. Preserve current data-loading from lib/data.ts and existing metadata/JsonLd. Make columns sortable: ASN (numeric), Name (alpha), Org (alpha), Country (alpha), and the size column (v4_slash24s for country IPv4 rows or v6_slots where applicable). Keep routes/links unchanged.
+
+# 2025-08-31 11:39:31.891346
++Refactor apps/web/app/country/[cc]/page.tsx and apps/web/app/org/[name]/page.tsx to use apps/web/components/SortableTable.tsx instead of Table. Preserve current data-loading from lib/data.ts and existing metadata/JsonLd. Make columns sortable: ASN (numeric), Name (alpha), Org (alpha), Country (alpha), and the size column (v4_slash24s for country IPv4 rows or v6_slots where applicable). Keep routes/links unchanged.
+
+# 2025-08-31 11:42:35.668927
++Improve apps/web/app/search/SearchClient.tsx: add 200ms debounce to the input filter; highlight matched substrings in ASN, Name, and Org using a <mark> wrapper; do not change dataset or routing. Keep accessibility: ensure aria-live polite updates for result count.
+
+# 2025-08-31 11:42:35.669250
++Improve apps/web/app/search/SearchClient.tsx: add 200ms debounce to the input filter; highlight matched substrings in ASN, Name, and Org using a <mark> wrapper; do not change dataset or routing. Keep accessibility: ensure aria-live polite updates for result count.
+
+# 2025-08-31 11:47:15.309741
++Update apps/web/components/SortableTable.tsx to support:
++- columns: { key: string; label: string; href?: (row: Record<string, any>) => string; format?: (value: any, row: Record<string, any>) => React.ReactNode }
++- If a column has 'href', wrap the cell content with <Link href={href(row)}>…</Link>
++- Keep existing sort behavior intact.
++
++Refactor pages to use SortableTable with proper links & formatting:
++1) apps/web/app/country/[cc]/page.tsx
++   - Show ASNs for the country using SortableTable.
++   - Columns:
++     • asn (href: (r) => `/asn/${r.asn}`)
++     • name (plain)
++     • org  (href: (r) => `/org/${encodeURIComponent(r.org)}`)
++     • country (href: (r) => `/country/${r.country}`)
++     • v4_slash24s (format: thousands with toLocaleString)
++     • v6_slots    (format: thousands with toLocaleString)
++   - Remove old Table import.
++
++2) apps/web/app/org/[name]/page.tsx
++   - Show ASNs for the org using SortableTable.
++   - Same columns & linking rules as above.
++
++3) apps/web/app/top/ipv4/page.tsx and apps/web/app/top/ipv6/page.tsx
++   - Switch to SortableTable.
++   - Use same columns & linking.
++   - Default sort: v4 page sorts by v4_slash24s desc; v6 page sorts by v6_slots desc (preserve existing sorting UX).
++
++Notes:
++- SortableTable remains a client component; pages stay server components (no 'use client' in pages).
++- Keep existing data helpers and dataset as-is.
++- Fix imports accordingly.
++- Ensure typecheck passes.
+
+# 2025-08-31 11:47:15.310447
++Update apps/web/components/SortableTable.tsx to support:
++- columns: { key: string; label: string; href?: (row: Record<string, any>) => string; format?: (value: any, row: Record<string, any>) => React.ReactNode }
++- If a column has 'href', wrap the cell content with <Link href={href(row)}>…</Link>
++- Keep existing sort behavior intact.
++
++Refactor pages to use SortableTable with proper links & formatting:
++1) apps/web/app/country/[cc]/page.tsx
++   - Show ASNs for the country using SortableTable.
++   - Columns:
++     • asn (href: (r) => `/asn/${r.asn}`)
++     • name (plain)
++     • org  (href: (r) => `/org/${encodeURIComponent(r.org)}`)
++     • country (href: (r) => `/country/${r.country}`)
++     • v4_slash24s (format: thousands with toLocaleString)
++     • v6_slots    (format: thousands with toLocaleString)
++   - Remove old Table import.
++
++2) apps/web/app/org/[name]/page.tsx
++   - Show ASNs for the org using SortableTable.
++   - Same columns & linking rules as above.
++
++3) apps/web/app/top/ipv4/page.tsx and apps/web/app/top/ipv6/page.tsx
++   - Switch to SortableTable.
++   - Use same columns & linking.
++   - Default sort: v4 page sorts by v4_slash24s desc; v6 page sorts by v6_slots desc (preserve existing sorting UX).
++
++Notes:
++- SortableTable remains a client component; pages stay server components (no 'use client' in pages).
++- Keep existing data helpers and dataset as-is.
++- Fix imports accordingly.
++- Ensure typecheck passes.
+
+# 2025-08-31 12:07:52.943992
++-- Task: Enrich ASN detail page.
++
++Files to edit:
++- apps/web/app/asn/[id]/page.tsx
++- apps/web/lib/data.ts
++
++Requirements:
++- Show cards for /24s and IPv6 slots if present.
++- Add a small details section with:
++  • Org (linked to /org/<org>)
++  • Country (linked to /country/<CC>)
++  • Name
++- Add JSON-LD: use <SeoJsonLd json={...}> with an "Organization" or "Thing" node for the ASN.
++  Use url: `${process.env.NEXT_PUBLIC_BASE_PATH || '/asn-zone'}/asn/${id}`
++- Keep output: 'export' compatibility (generateStaticParams present; no runtime fetch).
++- Maintain basePath routing and link patterns.
++- Small, focused diffs. Keep the build green.
+
+# 2025-08-31 12:07:52.944475
++-- Task: Enrich ASN detail page.
++
++Files to edit:
++- apps/web/app/asn/[id]/page.tsx
++- apps/web/lib/data.ts
++
++Requirements:
++- Show cards for /24s and IPv6 slots if present.
++- Add a small details section with:
++  • Org (linked to /org/<org>)
++  • Country (linked to /country/<CC>)
++  • Name
++- Add JSON-LD: use <SeoJsonLd json={...}> with an "Organization" or "Thing" node for the ASN.
++  Use url: `${process.env.NEXT_PUBLIC_BASE_PATH || '/asn-zone'}/asn/${id}`
++- Keep output: 'export' compatibility (generateStaticParams present; no runtime fetch).
++- Maintain basePath routing and link patterns.
++- Small, focused diffs. Keep the build green.
+
+# 2025-08-31 12:20:41.997446
++Task: Make tables sortable with preserved link cells.
++Files to edit:
++- apps/web/components/SortableTable.tsx
++- apps/web/app/top/ipv4/page.tsx
++- apps/web/app/top/ipv6/page.tsx
++Requirements:
++- Click header toggles asc/desc; show ▲/▼ indicator.
++- When a column has kind "asn"/"org"/"country", keep <Link> wrapping.
++- Numeric sorts for v4_slash24s/v6_slots; string sorts for others.
++- No client data fetch; all data passed via props.
++- Keep build green.
++
+
+# 2025-08-31 12:20:41.997864
++Task: Make tables sortable with preserved link cells.
++Files to edit:
++- apps/web/components/SortableTable.tsx
++- apps/web/app/top/ipv4/page.tsx
++- apps/web/app/top/ipv6/page.tsx
++Requirements:
++- Click header toggles asc/desc; show ▲/▼ indicator.
++- When a column has kind "asn"/"org"/"country", keep <Link> wrapping.
++- Numeric sorts for v4_slash24s/v6_slots; string sorts for others.
++- No client data fetch; all data passed via props.
++- Keep build green.
++
+
+# 2025-08-31 12:41:12.287311
++Task: Improve search UX: debounce & highlight.
++Files to edit:
++- apps/web/app/search/SearchClient.tsx
++Requirements:
++- Add 250–300ms debounce before filtering.
++- Highlight matching substrings in results (wrap with <mark>).
++- Keyboard: Up/Down to navigate, Enter to open, Esc clears.
++- No network fetch; keep export mode compatible.
++- Keep build green.
++
+
+# 2025-08-31 12:41:12.287491
++Task: Improve search UX: debounce & highlight.
++Files to edit:
++- apps/web/app/search/SearchClient.tsx
++Requirements:
++- Add 250–300ms debounce before filtering.
++- Highlight matching substrings in results (wrap with <mark>).
++- Keyboard: Up/Down to navigate, Enter to open, Esc clears.
++- No network fetch; keep export mode compatible.
++- Keep build green.
++
+
+# 2025-08-31 12:42:37.195008
++Task: Footer & site JSON-LD.
++Files to edit:
++- apps/web/app/layout.tsx
++- apps/web/app/components/Footer.tsx (create if missing)
++Requirements:
++- Footer: links to Home, Top IPv4, Top IPv6, Dataset (JSON), Search.
++- Use <SeoJsonLd json={...}> at layout-level with WebSite JSON-LD.
++- Respect basePath for links.
++- Keep build green.
++
+
+# 2025-08-31 12:42:37.195301
++Task: Footer & site JSON-LD.
++Files to edit:
++- apps/web/app/layout.tsx
++- apps/web/app/components/Footer.tsx (create if missing)
++Requirements:
++- Footer: links to Home, Top IPv4, Top IPv6, Dataset (JSON), Search.
++- Use <SeoJsonLd json={...}> at layout-level with WebSite JSON-LD.
++- Respect basePath for links.
++- Keep build green.
++
