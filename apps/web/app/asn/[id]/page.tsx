@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Breadcrumbs from '../../../components/ui/Breadcrumbs';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { JsonLd, asnThingJsonLd } from '../../../lib/seo';
 import { loadGlobal, getAsnById } from '../../../lib/data';
 import { fmt } from '../../../lib/num';
@@ -67,6 +67,21 @@ export default async function AsnPage({ params }: { params: { id: string } }) {
             <div className="text-2xl font-semibold">{fmt(a.v6_slots)}</div>
           </div>
         )}
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Details</h2>
+        <ul className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
+          <li>
+            <strong>Org:</strong> <Link href={`/org/${a.org}`}>{a.org}</Link>
+          </li>
+          <li>
+            <strong>Country:</strong> <Link href={`/country/${a.country}`}>{a.country}</Link>
+          </li>
+          <li>
+            <strong>Name:</strong> {a.name}
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm text-gray-500">
