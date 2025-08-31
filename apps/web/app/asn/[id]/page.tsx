@@ -1,20 +1,20 @@
 import Link from 'next/link';
-import Breadcrumbs from '../../../components/ui/Breadcrumbs';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import { JsonLd, asnThingJsonLd } from '../../../lib/seo';
 import { loadGlobal, getAsnById } from '../../../lib/data';
 import { fmt } from '../../../lib/num';
 
-
 export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  const { loadGlobal } = await import("../../../lib/data");
   const g = await loadGlobal();
-  const ids = Array.from(new Set([
-    ...(g?.top?.ipv4 || []).map(r => String(r.asn)).filter(Boolean),
-    ...(g?.top?.ipv6 || []).map(r => String(r.asn)).filter(Boolean),
-  ]));
-  return ids.slice(0, 200).map(id => ({ id }));
+  const ids = [...g.top.ipv4.map((r) => r.asn), ...g.top.ipv6.map((r) => r.asn)];
+  // a few seeded IDs for static export
+  return Array.from(new Set(ids))
+    .slice(0, 50)
+    .map((id) => ({ id: String(id) }));
 }
+
 export default async function AsnPage({ params }: { params: { id: string } }) {
   const g = await loadGlobal();
   const a = getAsnById(g, Number(params.id));
@@ -67,6 +67,21 @@ export default async function AsnPage({ params }: { params: { id: string } }) {
             <div className="text-2xl font-semibold">{fmt(a.v6_slots)}</div>
           </div>
         )}
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Details</h2>
+        <ul className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
+          <li>
+            <strong>Org:</strong> <Link href={`/org/${a.org}`}>{a.org}</Link>
+          </li>
+          <li>
+            <strong>Country:</strong> <Link href={`/country/${a.country}`}>{a.country}</Link>
+          </li>
+          <li>
+            <strong>Name:</strong> {a.name}
+          </li>
+        </ul>
       </div>
 
       <div className="text-sm text-gray-500">
