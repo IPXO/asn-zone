@@ -1,3 +1,4 @@
+import ThemeInit from './ThemeInit';
 import './globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,6 +9,7 @@ import ActiveNav from './components/ActiveNav';
 import { loadGlobal } from '../lib/data';
 
 export const metadata = {
+  metadataBase: process.env.NEXT_PUBLIC_CANONICAL ? new URL(process.env.NEXT_PUBLIC_CANONICAL) : undefined,
   title: 'asn.zone — authoritative ASN directory',
   description: 'Explore ASNs, IP space, ownership, and trends.',
   icons: {
@@ -34,27 +36,22 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-white text-gray-900 dark:bg-black dark:text-gray-100 antialiased">
-        <Providers>
+      <ThemeInit />
+<Providers>
           <SeoJsonLd />
-          <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
-            <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-              <Link href="/" className="flex items-center gap-3">
-                <Image
-                  src="brand/logo.svg"
-                  alt="asn.zone"
-                  width={120}
-                  height={32}
-                  priority
-                  unoptimized
-                />
-              </Link>
+          <header className="border-b border-gray-200/70 dark:border-white/10">
+  <div className="container mx-auto flex items-center justify-between py-4">
+    <a href="/" className="flex items-center gap-3">
+      
 
-              <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
-                <ActiveNav />
-                <ThemeToggle />
-              </nav>
-            </div>
-          </header>
+      <Image src="/brand/logo-light.svg" alt="asn.zone" className="h-7 w-auto dark:hidden" width={120} height={24} priority />
+      
+
+      <Image src="/brand/logo-dark.svg" alt="asn.zone" className="h-7 w-auto hidden dark:inline" width={120} height={24} priority />
+    </a>
+    <nav className="text-sm text-gray-600 dark:text-gray-300">{/* nav here */}</nav>
+  </div>
+</header>
 
           <main className="container mx-auto max-w-5xl px-4 py-8">{children}</main>
 

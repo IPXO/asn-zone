@@ -31,3 +31,13 @@ body {
 .container {
   @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
 }
+
+/* Make monochrome/light logos adapt in dark theme */
+.themed-logo { transition: filter 150ms ease; }
+.dark .themed-logo { filter: invert(1) hue-rotate(180deg); }
+
+/* Themeable logo (light/dark) */
+.logo-light { display:inline-block }
+.logo-dark  { display:none }
+.dark .logo-light { display:none }
+.dark .logo-dark  { display:inline-block }
