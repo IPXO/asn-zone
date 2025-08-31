@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd apps/web
+aider --yes <<'PROMPT'
+Task: Light design pass using Tailwind (no breaking changes).
+
+Please:
+1) Update apps/web/tailwind.config.(js|ts) (whichever exists) to:
+   - ensure darkMode: 'class'
+   - extend theme:
+       container: { center: true, padding: '1rem', screens: { '2xl': '64rem' } }
+       fontFamily: set sans to system-ui stack if not present
+       colors: keep Tailwind defaults; do NOT rename existing color tokens
+2) Update apps/web/app/globals.css:
+   - Ensure @tailwind base; @tailwind components; @tailwind utilities exist once.
+   - Add a small base layer polish:
+       * html { scroll-behavior: smooth; }
+       * ::selection { @apply bg-indigo-600 text-white; }
+       * a { @apply underline-offset-2; }
+   - Do not change layout.tsx body classes (dark mode is handled there already).
+
+Do not rename or move any files. Keep changes minimal and additive.
+PROMPT

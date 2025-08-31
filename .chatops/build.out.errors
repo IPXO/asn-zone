@@ -1,0 +1,232 @@
+==> Build attempt 1/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./app/country/[cc]/page.tsx:4:18
+Type error: Module '"../../../lib/seo"' has no exported member 'itemListJsonLd'.
+
+[0m [90m 2 |[39m [36mimport[39m [33mBreadcrumbs[39m [36mfrom[39m [32m"../../../components/ui/Breadcrumbs"[39m[33m;[39m[0m
+[0m [90m 3 |[39m [36mimport[39m [33mTable[39m [36mfrom[39m [32m"../../../components/Table"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mJsonLd[39m[33m,[39m itemListJsonLd } [36mfrom[39m [32m"../../../lib/seo"[39m[33m;[39m[0m
+[0m [90m   |[39m                  [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { loadGlobal[33m,[39m getAsnsByCountry[33m,[39m isoCountryName } [36mfrom[39m [32m"../../../lib/data"[39m[33m;[39m[0m
+[0m [90m 6 |[39m[0m
+[0m [90m 7 |[39m [36mexport[39m [36mconst[39m dynamicParams [33m=[39m [36mfalse[39m[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 2/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 3/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 4/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 5/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 6/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 7/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 8/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 9/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors
+==> Aider changes applied (if any). Re-attempting…
+==> Build attempt 10/10
+
+> build
+> next build
+
+  ▲ Next.js 14.2.32
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./lib/seo.tsx
+Module not found: Can't resolve 'react-schemaorg'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/layout.tsx
+
+
+> Build failed because of webpack errors
+==> Build failed; capturing errors

@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+# Clean logs
+: > .chatops/build.out || true
+: > .chatops/build.out.errors || true
+
+# Build loop (up to 10 tries)
+for i in $(seq 1 10); do
+  echo "==> Build attempt $i/10" | tee -a .chatops/build.out
+  if npm --prefix apps/web run build >> .chatops/build.out 2>&1; then
+    echo "==> ✅ Build succeeded" | tee -a .chatops/build.out
+    exit 0
+  fi
+
+  echo "==> Build failed; capturing errors" | tee -a .chatops/build.out
+  tail -n 400 .chatops/build.out > .chatops/build.out.errors || true
+
+  # Special case: aide config error bail-out
+  if grep -q "contains a line starting with 'yes:'" .chatops/build.out.errors 2>/dev/null; then
+    echo "Configuration error detected." | tee -a .chatops/build.out
+    echo "Please ensure .aider.conf.yml uses 'yes-always:' not 'yes:'." | tee -a .chatops/build.out
+    break
+  fi
+
+  # Ask Aider to fix build based on errors. DON'T pass deprecated underscores flags;
+  # rely entirely on .aider.conf.yml.
+  aider -c .aider.conf.yml --yes-always \
+    --message "You are a code-fixer. Read .chatops/build.out.errors (recent Next.js build errors) and make minimal edits to fix the build. Only touch files under apps/web/. Keep commits atomic with good messages. Then stop." \
+    --read .chatops/build.out.errors \
+    apps/web || true
+
+  echo "==> Aider changes applied (if any). Re-attempting…" | tee -a .chatops/build.out
+done
+
+echo "==> ❌ Still failing after 10 attempts; see $ROOT/.chatops/build.out for details."
+exit 1

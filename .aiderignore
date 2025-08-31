@@ -1,0 +1,35 @@
+# Ignore build artifacts
+apps/web/.next/
+apps/web/out/
+dist/
+.cache/
+coverage/
+
+# Ignore lockfiles and logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+apps/web/package-lock.json
+
+# Ignore ChatOps runtime junk
+.chatops/last.log
+.chatops/tmp/
+.chatops/cache/
+
+# Ignore Aider state/history (but keep config)
+.aider*state*
+.aider*cache*
+.aider.chat.*
+
+# Ignore OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Keep config files visible to Aider
+!.editorconfig
+!.gitignore
+!.gitattributes
+!.aider.conf.yml

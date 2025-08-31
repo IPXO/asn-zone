@@ -29,7 +29,7 @@ export default async function OrgPage({ params }: { params: { name: string } }) 
 
   return (
     <div className="space-y-6">
-      <JsonLd data={itemListJsonLd({ baseUrl, name: `ASNs for ${params.name}`, items })} />
+      <JsonLd json={itemListJsonLd({ baseUrl, name: `ASNs for ${params.name}`, items })} />
 
       <Breadcrumbs items={[
         { href: "/", label: "Home" },

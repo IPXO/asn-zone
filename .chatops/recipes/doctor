@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Dataset presence & schema"
+if [[ ! -f apps/web/data/current/global.json ]]; then
+  echo "ERROR: apps/web/data/current/global.json is missing"; exit 1
+fi
+node - <<'NODE'
+const fs = require('fs');
+const p = 'apps/web/data/current/global.json';
+const j = JSON.parse(fs.readFileSync(p,'utf8'));
+let ok = true;
+function need(k){ if(!(k in j)){ console.log('Missing key:', k); ok=false; } }
+need('generated_at'); need('stats'); need('top');
+if (j.stats) { ['asns_total','ipv4_announced','ipv6_announced'].forEach(k=>{ if(!(k in j.stats)){ console.log('Missing stats.'+k); ok=false; } }); }
+if (j.top) { ['ipv4','ipv6'].forEach(k=>{ if(!Array.isArray(j.top[k])){ console.log('top.'+k,'is not array'); ok=false; } }); }
+console.log('Dataset looks', ok ? 'OK' : 'BROKEN');
+if(!ok) process.exit(2);
+NODE
+
+echo "==> JSX sanity (TSX where needed)"
+# Any file that contains "<script" or "</>" likely JSX; warn if extension is .ts
+if grep -RIl --include='*.ts' '<[A-Za-z/]' apps/web/lib apps/web/app 2>/dev/null | grep -v '\.d\.ts$' | grep -q . ; then
+  echo "WARN: Found JSX-like tokens in .ts files (should be .tsx):"
+  grep -RIl --include='*.ts' '<[A-Za-z/]' apps/web/lib apps/web/app | sed 's/^/  - /'
+fi
+
+echo "==> Dynamic routes need generateStaticParams()"
+FAIL=0
+while IFS= read -r f; do
+  # expect a page.tsx/ts in dynamic segments
+  if [[ -f "$f/page.tsx" || -f "$f/page.ts" ]]; then
+    if ! grep -q 'export async function generateStaticParams' "$f/page."*; then
+      echo "MISSING generateStaticParams(): $f/page.tsx"
+      FAIL=1
+    fi
+  fi
+done < <(find apps/web/app -type d -path '*/\[*\]*')
+if [[ $FAIL -ne 0 ]]; then
+  echo "ERROR: add generateStaticParams() to the routes above."
+  exit 2
+fi
+
+echo "==> OK"

@@ -30,7 +30,7 @@ export default async function CountryPage({ params }: { params: { cc: string } }
 
   return (
     <div className="space-y-6">
-      <JsonLd data={itemListJsonLd({ baseUrl, name: `ASNs in ${ccLabel}`, items })} />
+      <JsonLd json={itemListJsonLd({ baseUrl, name: `ASNs in ${ccLabel}`, items })} />
 
       <Breadcrumbs items={[
         { href: "/", label: "Home" },

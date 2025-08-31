@@ -48,7 +48,6 @@ __pycache__/
 .aider.chat.*
 .aider*cache*
 .aider*state*
-# allow config
 !.aider.conf.yml
 
 # ------------------------------
@@ -102,4 +101,7 @@ pnpm-debug.log*
 # Large model files (if ever added by mistake)
 # ------------------------------
 *.gguf
-
+*.bin
+*.pt
+*.onnx
+*.safetensors

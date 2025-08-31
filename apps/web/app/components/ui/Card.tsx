@@ -1,28 +1,27 @@
-import cn from 'classnames';
+import React, { ReactNode } from "react";
+import { cn } from "../../../lib/cn";
 
-export function CardHeader({ children }: { children: React.ReactNode }) {
+type BaseProps = {
+  className?: string;
+  children?: ReactNode; // children optional to avoid strict prop errors
+};
+
+export default function Card({ className, children }: BaseProps) {
   return (
-    <div className="flex items-center justify-between p-4">
+    <div className={cn("rounded-2xl border border-gray-200/70 dark:border-white/10 bg-white dark:bg-black", className)}>
       {children}
     </div>
   );
 }
 
-export function CardContent({ children }: { children: React.ReactNode }) {
+export function CardHeader({ className, children }: BaseProps) {
   return (
-    <div className="p-4">
+    <div className={cn("px-4 py-3 border-b border-gray-200/70 dark:border-white/10", className)}>
       {children}
     </div>
   );
 }
 
-export default function Card({ children, className }: { children: React.ReactNode, className?: string }) {
-  return (
-    <div
-      className={cn("rounded-md border border-gray-200/70 dark:border-white/10", className)}
-    >
-      <CardHeader />
-      <CardContent>{children}</CardContent>
-    </div>
-  );
+export function CardContent({ className, children }: BaseProps) {
+  return <div className={cn("px-4 py-4", className)}>{children}</div>;
 }

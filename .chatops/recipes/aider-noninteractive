@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+MSG="${1:-}"
+if [[ -z "$MSG" ]]; then
+  echo "Usage: .chatops/recipes/aider-noninteractive \"your message...\""
+  exit 2
+fi
+
+shift || true
+aider -c .aider.conf.yml --yes-always --message "$MSG" "$@" || true

@@ -1,4 +1,18 @@
+# Build & generated
 .next
 out
+dist
+coverage
+
+# Dependencies
 node_modules
+
+# Generated dataset (don’t reformat machine output)
+apps/web/data/current/global.json
+
+# ChatOps & Aider runtime noise
+.chatops/**
+.aider*
+
+# Logs
 *.log
