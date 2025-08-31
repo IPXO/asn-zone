@@ -217,3 +217,9 @@
 
 # 2025-08-31 11:39:31.891346
 +Refactor apps/web/app/country/[cc]/page.tsx and apps/web/app/org/[name]/page.tsx to use apps/web/components/SortableTable.tsx instead of Table. Preserve current data-loading from lib/data.ts and existing metadata/JsonLd. Make columns sortable: ASN (numeric), Name (alpha), Org (alpha), Country (alpha), and the size column (v4_slash24s for country IPv4 rows or v6_slots where applicable). Keep routes/links unchanged.
+
+# 2025-08-31 11:42:35.668927
++Improve apps/web/app/search/SearchClient.tsx: add 200ms debounce to the input filter; highlight matched substrings in ASN, Name, and Org using a <mark> wrapper; do not change dataset or routing. Keep accessibility: ensure aria-live polite updates for result count.
+
+# 2025-08-31 11:42:35.669250
++Improve apps/web/app/search/SearchClient.tsx: add 200ms debounce to the input filter; highlight matched substrings in ASN, Name, and Org using a <mark> wrapper; do not change dataset or routing. Keep accessibility: ensure aria-live polite updates for result count.
