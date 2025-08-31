@@ -7,7 +7,7 @@ import Table from '../../components/Table';
 
 const debounce = (func: (...args: any[]) => void, wait: number) => {
   let timeout: NodeJS.Timeout | null = null;
-  return function(...args: any[]) {
+  return function (...args: any[]) {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
@@ -67,11 +67,13 @@ export default function SearchClient() {
           { key: 'country', label: 'CC' },
           { key: 'family', label: 'IP' },
         ]}
-        rows={rows.map((r) => ({
-          ...r,
-          name: r.name.replace(new RegExp(q, 'gi'), (match) => `<mark>${match}</mark>`),
-          org: r.org.replace(new RegExp(q, 'gi'), (match) => `<mark>${match}</mark>`),
-        })) as unknown as Record<string, any>[]}
+        rows={
+          rows.map((r) => ({
+            ...r,
+            name: r.name.replace(new RegExp(q, 'gi'), (match) => `<mark>${match}</mark>`),
+            org: r.org.replace(new RegExp(q, 'gi'), (match) => `<mark>${match}</mark>`),
+          })) as unknown as Record<string, any>[]
+        }
       />
     </div>
   );
