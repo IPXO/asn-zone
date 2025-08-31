@@ -6,8 +6,8 @@ import Link from 'next/link';
 export type Column = {
   key: string;
   label: string;
-  href?: (row: Record<string, any>) => string;
-  format?: (value: any, row: Record<string, any>) => React.ReactNode;
+  /** how to render this column on the client (no server functions!) */
+  kind?: 'text' | 'asn' | 'org' | 'country' | 'number';
 };
 
 export default function SortableTable({
@@ -49,18 +49,38 @@ export default function SortableTable({
     }
   };
 
-  const renderCell = (col: Column, value: any, row: Record<string, any>) => {
-    if (col.href) {
-      return (
-        <Link href={col.href(row)} className="text-indigo-600">
-          {value}
-        </Link>
-      );
+  const renderCell = (col: Column, value: any) => {
+    switch (col.kind) {
+      case 'asn': {
+        const v = Number(value);
+        return (
+          <Link className="text-indigo-600" href={`/asn/${v}`}>
+            AS{v}
+          </Link>
+        );
+      }
+      case 'org': {
+        const v = String(value ?? '');
+        return (
+          <Link className="text-indigo-600" href={`/org/${encodeURIComponent(v)}`}>
+            {v}
+          </Link>
+        );
+      }
+      case 'country': {
+        const v = String(value ?? '');
+        return (
+          <Link className="text-indigo-600" href={`/country/${encodeURIComponent(v)}`}>
+            {v}
+          </Link>
+        );
+      }
+      case 'number':
+        return <div className="text-right">{Number(value ?? 0).toLocaleString('en-US')}</div>;
+      case 'text':
+      default:
+        return String(value ?? '');
     }
-    if (col.format) {
-      return col.format(value, row);
-    }
-    return String(value ?? '');
   };
 
   return (
@@ -87,7 +107,7 @@ export default function SortableTable({
             <tr key={i} className="hover:bg-gray-50/60 dark:hover:bg-white/[0.04]">
               {columns.map((c) => (
                 <td key={c.key} className="px-3 py-2">
-                  {renderCell(c, row[c.key], row)}
+                  {renderCell(c, row[c.key])}
                 </td>
               ))}
             </tr>
