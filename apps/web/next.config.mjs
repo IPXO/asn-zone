@@ -1,12 +1,8 @@
-const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/asn-zone' : '';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Only enforce static export in production
-  ...(isProd ? { output: 'export' } : {}),
-  basePath,
-  assetPrefix: basePath + '/',
-  images: { unoptimized: true },
+  output: 'export',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  experimental: { typedRoutes: false }
 };
 export default nextConfig;

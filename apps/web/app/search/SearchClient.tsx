@@ -1,3 +1,4 @@
+import { highlight } from "../../lib/highlight";
 'use client';
 
 import { useMemo, useState } from 'react';

@@ -1,0 +1,137 @@
+.aider.conf.toml
+.aider.conf.yml
+.aider.conf.yml.bak
+.aider.input.history
+.aiderignore
+.chatops/aider_prompt.txt
+.chatops/aider_task_asn.txt
+.chatops/build-check.sh
+.chatops/build.out
+.chatops/build.out.errors
+.chatops/build.out.tail
+.chatops/fix-sortable-imports.js
+.chatops/recipes/aider
+.chatops/recipes/aider-noninteractive
+.chatops/recipes/aider-theme
+.chatops/recipes/build-local
+.chatops/recipes/ci-local
+.chatops/recipes/dev-local
+.chatops/recipes/doctor
+.chatops/recipes/fix-build-loop
+.chatops/recipes/pages-deploy
+.chatops/run.sh
+.chatops/watch-aider.sh
+.chatops/with-log.sh
+.editorconfig
+.editorconfig.bak.20250830-205950
+.editorconfig.bak.20250830-210029
+.editorconfig.bak.20250830-210137
+.eslintignore
+.gitattributes
+.gitattributes.bak.20250830-205950
+.gitattributes.bak.20250830-210040
+.gitattributes.bak.20250830-210147
+.github/workflows/link-check.yml
+.github/workflows/pages.yml
+.github/workflows/weekly-dataset.yml
+.github/workflows/weekly-pipeline.yml
+.gitignore
+.gitignore.bak.20250830-205633
+.prettierignore
+.prettierrc.json
+Badge.tsx
+CONTRIBUTING.md
+Here is the updated content of `show_greeting.py
+LICENSE
+LICENSE-DATA
+Makefile
+README.md
+SearchClient.tsx
+Updated File: apps/web/app/asn/[id]/page.tsx
+Updated File: apps/web/app/components/ActiveNav.tsx
+Updated File: apps/web/app/components/Badge.tsx
+Updated File: apps/web/app/components/Stat.tsx
+Updated File: apps/web/app/components/Table.tsx
+Updated File: apps/web/app/components/ui/Card.tsx
+Updated File: apps/web/app/country/[cc]/page.tsx
+Updated File: apps/web/app/globals.css
+Updated File: apps/web/app/org/[name]/page.tsx
+Updated File: apps/web/app/top/ipv4/page.tsx
+Updated File: apps/web/app/top/ipv6/page.tsx
+Updated File: apps/web/components/SortableTable.tsx
+Updated File: apps/web/lib/seo.tsx
+Updated File: apps/web/public/favicon.svg
+Updated File: tailwind.config.js
+apps/web/.eslintignore
+apps/web/.eslintrc.json
+apps/web/.prettierignore
+apps/web/app/SeoJsonLd.tsx
+apps/web/app/ThemeToggle.tsx
+apps/web/app/about/page.tsx
+apps/web/app/asn/[id]/page.tsx
+apps/web/app/asn/[id]/page.tsx.bak
+apps/web/app/components/ActiveNav.tsx
+apps/web/app/components/Badge.tsx
+apps/web/app/components/Breadcrumb.tsx
+apps/web/app/components/Breadcrumbs.tsx
+apps/web/app/components/Footer.tsx
+apps/web/app/components/Stat.tsx
+apps/web/app/components/Table.tsx
+apps/web/app/components/ui/Card.tsx
+apps/web/app/contact/page.tsx
+apps/web/app/country/[cc]/page.tsx
+apps/web/app/country/page.tsx
+apps/web/app/data/current/global.json/route.ts
+apps/web/app/globals.css
+apps/web/app/layout.tsx
+apps/web/app/not-found.tsx
+apps/web/app/org/[name]/page.tsx
+apps/web/app/org/page.tsx
+apps/web/app/page.tsx
+apps/web/app/privacy/page.tsx
+apps/web/app/providers.tsx
+apps/web/app/robots.txt.ts
+apps/web/app/search/SearchClient.tsx
+apps/web/app/search/page.tsx
+apps/web/app/top/ipv4/page.tsx
+apps/web/app/top/ipv6/page.tsx
+apps/web/apps/web/data/current/global.json
+apps/web/components/Badge.tsx
+apps/web/components/Skeleton.tsx
+apps/web/components/SortableTable.tsx
+apps/web/components/Stat.tsx
+apps/web/components/Table.tsx
+apps/web/components/ui/Breadcrumbs.tsx
+apps/web/components/ui/Card.tsx
+apps/web/data/.gitkeep
+apps/web/data/current/global.json
+apps/web/data/snapshots/2025-08-28/global.json
+apps/web/lib/cn.tsx
+apps/web/lib/data.tsx
+apps/web/lib/num.ts
+apps/web/lib/seo.tsx
+apps/web/next-env.d.ts
+apps/web/next.config.mjs
+apps/web/package-lock.json
+apps/web/package.json
+apps/web/postcss.config.js
+apps/web/public/brand/logo.svg
+apps/web/public/favicon.ico
+apps/web/public/favicon.svg
+apps/web/public/robots.txt
+apps/web/public/sitemap.xml
+apps/web/scripts/mkroute.mjs
+apps/web/tailwind.config.js
+apps/web/tsconfig.json
+asn/[id]/page.tsx
+data/current/global.json
+package-lock 2.json
+package-lock.json
+package.json
+path/to/filename.js
+prettier-check.yml
+scripts/fetch-dataset.sh
+scripts/mkroute.mjs
+scripts/requirements.txt
+tailwind.config.js
+tools/build-dataset.ts

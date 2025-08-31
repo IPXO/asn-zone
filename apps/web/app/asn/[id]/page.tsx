@@ -4,17 +4,17 @@ import { JsonLd, asnThingJsonLd } from '../../../lib/seo';
 import { loadGlobal, getAsnById } from '../../../lib/data';
 import { fmt } from '../../../lib/num';
 
+
 export const dynamicParams = false;
-
 export async function generateStaticParams() {
+  const { loadGlobal } = await import("../../../lib/data");
   const g = await loadGlobal();
-  const ids = [...g.top.ipv4.map((r) => r.asn), ...g.top.ipv6.map((r) => r.asn)];
-  // a few seeded IDs for static export
-  return Array.from(new Set(ids))
-    .slice(0, 50)
-    .map((id) => ({ id: String(id) }));
+  const ids = Array.from(new Set([
+    ...(g?.top?.ipv4 || []).map(r => String(r.asn)).filter(Boolean),
+    ...(g?.top?.ipv6 || []).map(r => String(r.asn)).filter(Boolean),
+  ]));
+  return ids.slice(0, 200).map(id => ({ id }));
 }
-
 export default async function AsnPage({ params }: { params: { id: string } }) {
   const g = await loadGlobal();
   const a = getAsnById(g, Number(params.id));

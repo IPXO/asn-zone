@@ -106,3 +106,7 @@ pnpm-debug.log*
 *.onnx
 *.safetensors
 .aider*
+
+# Backups & local logs
+*.bak.*
+.aider.input.history
