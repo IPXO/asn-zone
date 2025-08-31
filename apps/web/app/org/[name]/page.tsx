@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Breadcrumbs from '../../../components/ui/Breadcrumbs';
-import Table from '../../../components/Table';
 import { JsonLd, itemListJsonLd } from '../../../lib/seo';
+import SortableTable from '../../../components/SortableTable';
 import { loadGlobal, getAsnsByOrg } from '../../../lib/data';
 
 export const dynamicParams = false;
@@ -46,31 +46,23 @@ export default async function OrgPage({ params }: { params: { name: string } }) 
 
       <h1 className="text-xl font-semibold">{params.name}</h1>
 
-      <Table
+      <SortableTable
         columns={[
           {
             key: 'asn',
             label: 'ASN',
-            render: (v) => (
-              <Link className="text-indigo-600" href={`/asn/${v}`}>
-                AS{v}
-              </Link>
-            ),
+            kind: 'number',
           },
           { key: 'name', label: 'Name' },
           {
             key: 'country',
-            label: 'CC',
-            render: (v) => (
-              <Link className="text-indigo-600" href={`/country/${encodeURIComponent(String(v))}`}>
-                {String(v)}
-              </Link>
-            ),
+            label: 'Country',
+            kind: 'text',
           },
-          { key: 'v4_slash24s', label: '/24s', render: (v) => fmt(Number(v)) },
-          { key: 'v6_slots', label: 'v6 slots', render: (v) => fmt(Number(v)) },
+          { key: 'v4_slash24s', label: '/24s', kind: 'number' },
+          { key: 'v6_slots', label: 'v6 slots', kind: 'number' },
         ]}
-        rows={rows as unknown as Record<string, any>[]}
+        rows={rows}
       />
     </div>
   );
