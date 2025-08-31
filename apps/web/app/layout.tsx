@@ -1,35 +1,35 @@
-import "./globals.css";
-import Link from "next/link";
-import Image from "next/image";
-import { Providers } from "./providers";
-import SeoJsonLd from "./SeoJsonLd";
-import ThemeToggle from "./ThemeToggle";
-import ActiveNav from "./components/ActiveNav";
-import { loadGlobal } from "../lib/data";
+import './globals.css';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Providers } from './providers';
+import SeoJsonLd from './SeoJsonLd';
+import ThemeToggle from './ThemeToggle';
+import ActiveNav from './components/ActiveNav';
+import { loadGlobal } from '../lib/data';
 
 export const metadata = {
-  title: "asn.zone — authoritative ASN directory",
-  description: "Explore ASNs, IP space, ownership, and trends.",
+  title: 'asn.zone — authoritative ASN directory',
+  description: 'Explore ASNs, IP space, ownership, and trends.',
   icons: {
     icon: [
-      { url: "favicon.ico", type: "image/x-icon" },
-      { url: "favicon.svg", type: "image/svg+xml" },
+      { url: 'favicon.ico', type: 'image/x-icon' },
+      { url: 'favicon.svg', type: 'image/svg+xml' },
     ],
-    shortcut: ["favicon.ico"],
-    apple: [{ url: "favicon.svg" }],
+    shortcut: ['favicon.ico'],
+    apple: [{ url: 'favicon.svg' }],
   },
 };
 
 function formatPrettyDate(iso: string) {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
+  return d.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const global = await loadGlobal();
   const lastUpdatedISO = new Date(global.generated_at).toISOString();
   const lastUpdatedPretty = formatPrettyDate(global.generated_at);
-  const totalAsns = global.stats.asns_total.toLocaleString("en-US");
+  const totalAsns = global.stats.asns_total.toLocaleString('en-US');
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -49,7 +49,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 />
               </Link>
 
-              <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4"><ActiveNav /><ThemeToggle /></nav>
+              <nav className="text-sm text-gray-600 dark:text-gray-300 flex items-center gap-4">
+                <ActiveNav />
+                <ThemeToggle />
+              </nav>
             </div>
           </header>
 
@@ -71,7 +74,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </footer>
           <SeoJsonLd />
-
         </Providers>
       </body>
     </html>

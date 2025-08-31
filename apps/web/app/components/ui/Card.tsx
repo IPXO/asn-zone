@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { cn } from "../../../lib/cn";
+import React, { ReactNode } from 'react';
+import { cn } from '../../../lib/cn';
 
 type BaseProps = {
   className?: string;
@@ -8,7 +8,12 @@ type BaseProps = {
 
 export default function Card({ className, children }: BaseProps) {
   return (
-    <div className={cn("rounded-2xl border border-gray-200/70 dark:border-white/10 bg-white dark:bg-black", className)}>
+    <div
+      className={cn(
+        'rounded-2xl border border-gray-200/70 dark:border-white/10 bg-white dark:bg-black',
+        className,
+      )}
+    >
       {children}
     </div>
   );
@@ -16,12 +21,12 @@ export default function Card({ className, children }: BaseProps) {
 
 export function CardHeader({ className, children }: BaseProps) {
   return (
-    <div className={cn("px-4 py-3 border-b border-gray-200/70 dark:border-white/10", className)}>
+    <div className={cn('px-4 py-3 border-b border-gray-200/70 dark:border-white/10', className)}>
       {children}
     </div>
   );
 }
 
 export function CardContent({ className, children }: BaseProps) {
-  return <div className={cn("px-4 py-4", className)}>{children}</div>;
+  return <div className={cn('px-4 py-4', className)}>{children}</div>;
 }

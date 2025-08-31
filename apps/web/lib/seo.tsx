@@ -1,8 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const DEFAULT_BASE =
-  process.env.NEXT_PUBLIC_CANONICAL ||
-  "https://ipxo.github.io/asn-zone";
+const DEFAULT_BASE = process.env.NEXT_PUBLIC_CANONICAL || 'https://ipxo.github.io/asn-zone';
 
 export function absolute(pathOrUrl: string): string {
   if (!pathOrUrl) return DEFAULT_BASE;
@@ -10,8 +8,8 @@ export function absolute(pathOrUrl: string): string {
     const u = new URL(pathOrUrl);
     return u.toString(); // already absolute
   } catch {
-    const base = DEFAULT_BASE.endsWith("/") ? DEFAULT_BASE : DEFAULT_BASE + "/";
-    const rel = String(pathOrUrl).replace(/^\/+/, "");
+    const base = DEFAULT_BASE.endsWith('/') ? DEFAULT_BASE : DEFAULT_BASE + '/';
+    const rel = String(pathOrUrl).replace(/^\/+/, '');
     return new URL(rel, base).toString();
   }
 }
@@ -25,17 +23,17 @@ export function JsonLd({ json }: { json: unknown }) {
 
 /** Site-level JSON-LD (basic WebSite schema) */
 export function siteJsonLd() {
-  const url = absolute("/");
+  const url = absolute('/');
   return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
     url,
-    name: "asn.zone",
-    description: "Autonomous System stats, rankings and lookups.",
+    name: 'asn.zone',
+    description: 'Autonomous System stats, rankings and lookups.',
     potentialAction: {
-      "@type": "SearchAction",
-      target: `${absolute("/search")}?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
+      '@type': 'SearchAction',
+      target: `${absolute('/search')}?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
     },
   };
 }
@@ -43,13 +41,13 @@ export function siteJsonLd() {
 /** Generic ItemList JSON-LD for listing pages */
 export function itemListJsonLd(items: Array<{ url: string; name?: string }>) {
   return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": items.map((it, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "url": absolute(it.url),
-      ...(it.name ? { "name": it.name } : {})
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: items.map((it, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: absolute(it.url),
+      ...(it.name ? { name: it.name } : {}),
     })),
   };
 }
@@ -63,11 +61,11 @@ export function asnThingJsonLd(asn: {
 }) {
   const url = absolute(`/asn/${asn.asn}`);
   return {
-    "@context": "https://schema.org",
-    "@type": "Thing",
-    "name": `AS${asn.asn}${asn.name ? ` — ${asn.name}` : ""}`,
-    "url": url,
-    ...(asn.org ? { "additionalType": "Organization", "disambiguatingDescription": asn.org } : {}),
-    ...(asn.country ? { "identifier": `CC=${asn.country}` } : {}),
+    '@context': 'https://schema.org',
+    '@type': 'Thing',
+    name: `AS${asn.asn}${asn.name ? ` — ${asn.name}` : ''}`,
+    url: url,
+    ...(asn.org ? { additionalType: 'Organization', disambiguatingDescription: asn.org } : {}),
+    ...(asn.country ? { identifier: `CC=${asn.country}` } : {}),
   };
 }

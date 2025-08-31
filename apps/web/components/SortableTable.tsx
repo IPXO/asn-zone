@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
 
 export type Column = {
   key: string;
   label: string;
   /** how to render this column on the client (no server functions!) */
-  kind?: "text" | "asn" | "org" | "country" | "number";
+  kind?: 'text' | 'asn' | 'org' | 'country' | 'number';
 };
 
 export default function SortableTable({
   columns,
   rows,
   defaultSortKey,
-  defaultSortDir = "desc",
+  defaultSortDir = 'desc',
 }: {
   columns: Column[];
   rows: Record<string, any>[];
   defaultSortKey?: string;
-  defaultSortDir?: "asc" | "desc";
+  defaultSortDir?: 'asc' | 'desc';
 }) {
   const [sortKey, setSortKey] = useState<string>(defaultSortKey || columns[0]?.key);
-  const [sortDir, setSortDir] = useState<"asc" | "desc">(defaultSortDir);
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>(defaultSortDir);
 
   const sorted = useMemo(() => {
     const data = [...rows];
@@ -31,43 +31,55 @@ export default function SortableTable({
       const av = a?.[k];
       const bv = b?.[k];
       // numeric first if both numeric
-      const an = typeof av === "number";
-      const bn = typeof bv === "number";
+      const an = typeof av === 'number';
+      const bn = typeof bv === 'number';
       let cmp = 0;
       if (an && bn) cmp = (av as number) - (bv as number);
-      else cmp = String(av ?? "").localeCompare(String(bv ?? ""), "en", { sensitivity: "base" });
-      return sortDir === "asc" ? cmp : -cmp;
+      else cmp = String(av ?? '').localeCompare(String(bv ?? ''), 'en', { sensitivity: 'base' });
+      return sortDir === 'asc' ? cmp : -cmp;
     });
     return data;
   }, [rows, sortKey, sortDir]);
 
   const toggleSort = (k: string) => {
-    if (k === sortKey) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    if (k === sortKey) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
     else {
       setSortKey(k);
-      setSortDir("desc");
+      setSortDir('desc');
     }
   };
 
   const renderCell = (col: Column, value: any) => {
     switch (col.kind) {
-      case "asn": {
+      case 'asn': {
         const v = Number(value);
-        return <Link className="text-indigo-600" href={`/asn/${v}`}>AS{v}</Link>;
+        return (
+          <Link className="text-indigo-600" href={`/asn/${v}`}>
+            AS{v}
+          </Link>
+        );
       }
-      case "org": {
-        const v = String(value ?? "");
-        return <Link className="text-indigo-600" href={`/org/${encodeURIComponent(v)}`}>{v}</Link>;
+      case 'org': {
+        const v = String(value ?? '');
+        return (
+          <Link className="text-indigo-600" href={`/org/${encodeURIComponent(v)}`}>
+            {v}
+          </Link>
+        );
       }
-      case "country": {
-        const v = String(value ?? "");
-        return <Link className="text-indigo-600" href={`/country/${encodeURIComponent(v)}`}>{v}</Link>;
+      case 'country': {
+        const v = String(value ?? '');
+        return (
+          <Link className="text-indigo-600" href={`/country/${encodeURIComponent(v)}`}>
+            {v}
+          </Link>
+        );
       }
-      case "number":
-        return <div className="text-right">{Number(value ?? 0).toLocaleString("en-US")}</div>;
-      case "text":
+      case 'number':
+        return <div className="text-right">{Number(value ?? 0).toLocaleString('en-US')}</div>;
+      case 'text':
       default:
-        return String(value ?? "");
+        return String(value ?? '');
     }
   };
 
@@ -84,9 +96,7 @@ export default function SortableTable({
               >
                 <span className="inline-flex items-center gap-1">
                   {c.label}
-                  {sortKey === c.key && (
-                    <span aria-hidden>{sortDir === "asc" ? "▲" : "▼"}</span>
-                  )}
+                  {sortKey === c.key && <span aria-hidden>{sortDir === 'asc' ? '▲' : '▼'}</span>}
                 </span>
               </th>
             ))}
