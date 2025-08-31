@@ -28,9 +28,14 @@ export default async function CountryPage({ params }: { params: { cc: string } }
     name: `AS${r.asn} — ${r.name}`,
   }));
 
+  const jsonItems = rows.map(it => ({
+    url: `/asn/${it.asn}`,
+    name: it.name ? `AS${it.asn} — ${it.name}` : `AS${it.asn}`
+  }));
+
   return (
     <div className="space-y-6">
-      <JsonLd json={itemListJsonLd({ baseUrl, name: `ASNs in ${ccLabel}`, items })} />
+      <JsonLd json={itemListJsonLd(jsonItems)} />
 
       <Breadcrumbs items={[
         { href: "/", label: "Home" },

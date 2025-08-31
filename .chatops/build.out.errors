@@ -35,7 +35,7 @@ Next.js build worker exited with code: 1 and signal: null
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -58,7 +58,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -81,7 +81,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -104,7 +104,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -127,7 +127,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -150,7 +150,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -173,7 +173,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -196,7 +196,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found
@@ -219,7 +219,7 @@ Import trace for requested module:
    Creating an optimized production build ...
 Failed to compile.
 
-./lib/seo.tsx
+./lib/seo
 Module not found: Can't resolve 'react-schemaorg'
 
 https://nextjs.org/docs/messages/module-not-found

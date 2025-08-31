@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Providers } from "./providers";
 import SeoJsonLd from "./SeoJsonLd";
 import ThemeToggle from "./ThemeToggle";
-import { JsonLd, siteJsonLd } from "../lib/seo";
 import ActiveNav from "./components/ActiveNav";
 import { loadGlobal } from "../lib/data";
 
@@ -36,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" suppressHydrationWarning>
       <body className="bg-white text-gray-900 dark:bg-black dark:text-gray-100 antialiased">
         <Providers>
-          <JsonLd json={siteJsonLd} />
+          <SeoJsonLd />
           <header className="border-b border-gray-200/70 bg-white/70 dark:border-white/10 dark:bg-black/30 backdrop-blur">
             <div className="container mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">

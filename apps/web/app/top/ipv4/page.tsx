@@ -13,7 +13,7 @@ export default async function Page() {
 
   return (
     <div className="space-y-6">
-      <JsonLd json={itemListJsonLd({ name: "Top ASNs by IPv4 (/24 equivalents)", items: urls.map(u => ({ url: u })) })} />
+      <JsonLd json={itemListJsonLd(urls.map(u => ({ url: u })))} />
       <h1 className="text-xl font-semibold">Top ASNs by IPv4 (/24 equivalents)</h1>
       <p className="text-sm text-gray-500">Dataset updated {updated}</p>
       <Table
